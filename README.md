@@ -293,4 +293,5 @@ POE get at the start of the next turn is multiplied by 3.
 After receiving the next damage, apply 120% of it to the attacker.
 Note: one role cannot keep more than 1 working buffs at the same time.
 
+## 8. That's all
 That is all for the rule of the text-based《Yet another board game》. Thanks for finish reading it, and we wish you have fun!
