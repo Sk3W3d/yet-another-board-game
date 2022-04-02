@@ -23,7 +23,6 @@
 |---------------------|---------------|-------------------------------------|-------------------------------------------|---|
 |     walls           |     █         |     U+2588                          |     (single cell of walls)                |   |
 |     Items           |     ▧         |     U+25A7                          |     mirror                                |   |
-|                     |     ◖◾ ◗      |     U+25D6     U+25FE     U+25D7    |     ship                                  |   |
 |                     |     ꁵ        |     U+A075                          |     Electric pole                         |   |
 |     buffs           |     +         |     U+002B                          |     Health recovery buff                  |   |
 |                     |     ▿         |     U+25BF                          |     Shield buff                           |   |
@@ -53,7 +52,7 @@
 ## 4. Map and Pixels
 ### The scene of the game is map-based, and the map is pixel-based as this is a text-based game. Any object of this game (roles, items, buffs, single cell of walls, etc.) has to be placed on one certain pixel!
 
-## 5. 5.	(Active) Operations and related concepts
+## 5. (Active) Operations and related concepts
 Operations are POE-based. See in section 3
 
 ### 5.1.	Move and Mass
@@ -75,7 +74,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Ability 1 (attack): lightsaber 
         POE consumption: 12.
         Overheat: 2.
-        Deals 1*95 damage to all enemies within distance of 6. 
+        Deals 95 damage to all enemies within distance of 6. 
         Cannot penetrate walls.
     Ability 2 (special): shield
         POE consumption: 8.
@@ -96,7 +95,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Ability 1 (attack):
         POE consumption: 15
         Overheat: 2
-        Deals 3*30 damage to one enemy.
+        Deals 90 damage to one enemy.
         Cannot penetrate walls.
     Ability 2 (special): mirror
         POE consumption: 15
@@ -111,7 +110,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Ability 1 (attack): the force
         POE consumption: 7
         Overheat: 1
-        Deals 1*70 damage to every enemy within range of 7.
+        Deals 70 damage to every enemy within range of 7.
         Regardless of walls.
         Obi-wan recovers HP of 50*(n-1), where n is the number of target hit by him.
     Ability 2 (special): force control
@@ -146,7 +145,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Ability 1 (attack): fist of fury
         POE consumption: (-8)
         Overheat: 2 (however the 2nd attack deals twice damage but POE becomes 25).
-        Deals 2*50 damage to one enemy within distance of 1.
+        Deals 100 damage to one enemy within distance of 1.
     Ability 2 (special): roar (available only when HP mot less than 180)
         POE consumption: 40
         Overheat: 1
@@ -174,18 +173,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Pull all enemies within distance of 10 by distance of 5 (towards Vader).
 
 ### Jango Fett
-    Related items: ship
-        Boba is on his ship at the beginning of the game.
-        Ship share POE with Boba, but Max POE is different.
-        Ship’s Max (extra storage for Boba) POE: 90 (reset when Jango get off the ship)
-        Ship’s individual mass: 2.1
-        Ship’s ability 1 (attack): laser
-            POE consumption: 24
-            Overheat: 1
-            Deals 180 damage to one enemy within range of 14.
-            Destroy at most 10 cells of walls lying on the path.				
-        Ship’s ability 2 (passive): solar panels
-            Jango acquire 4 POE at the start of his turn, if he’s on ship.
+    Related items: N/A
     Max POE: 35
     Mass: 0.9
     HP: 400
@@ -195,21 +183,9 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Missile path is a polyline not longer than 12 with not more than 2 breakpoints.
         Deals 95 damage to every enemy within range of 4 when missile explodes.
         Destroy all cells of walls within this range. 
-    Ability 2 (special): boarding
-        POE consumption: 10
-        Overheat: +∞
-        Jango gets on the ship.
-        Ship’s abilities are enabled, Jango’s are disabled.
-        Ship doesn’t receive damage instead of Jango.
-    Ability 3 (special): getting off
-        POE consumption: 10
-        Overheat: +∞
-        Jango gets off the ship.
-        Ship’s abilities are disabled, Jango’s are enabled.
-        Ship’s extra POE storage is reset.
-    Ability 4 (passive): special arm
+    Ability 2 (passive): special arm
         When Jango receives damage : he applies 10% of it to every enemy within distance of 20, regardless of walls.
-    Ability 5 (passive) :
+    Ability 3 (passive):
         When Jango dies:his arming explodes and deals 200 damage to every enemy within distance 4.
         
 ### Tusken Raider
@@ -236,7 +212,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Ability 1 (attack): double bladed lightsaber
         POE consumption: 11
         Overheat: 1
-        Deals 2*40 damage to all enemy within distance of 6.
+        Deals 80 damage to all enemy within distance of 6.
         Cannot penetrate walls.
         After attack, acquire a chance to move by a distance not more than 5.
         The moving consumes no POE.
@@ -281,7 +257,7 @@ Roles can get buffs when they pass or stop at their pixels.
 
 Buffs are effective automatically, no extra operations are needed.
 
-When a buff is taken, another buff of the same kind will appear on a random pixel.
+Buffs will be randomly generated for every 5 rounds.
 
 ### 7.1.	Health recovery buff
 HP += 50 at the start of next 2 turns.
