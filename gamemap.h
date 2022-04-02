@@ -4,10 +4,11 @@
 
 class gamemap {
 public:
+
     void init_map();
     void output_map();
     void element_gen();
-    std::vector<std::vector<std::string>> get_map_content(std::vector<std::vector<std::string>>);
+    std::vector<std::vector<std::string>> get_map_content();
 
 private:
     // Every game character occupies 2 places: 
