@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 #include <iomanip>
+#include <ctime>
+#include <random>
 #include "gamemap.h"
 
 #define WALL "\u2588\u2588"
@@ -58,6 +60,7 @@ void gamemap::init_map(){
     // }
 }
 
+
 void gamemap::output_map(){
     for (int i = 0; i < 20; i++){
         for (int j = 0; j < 40; j++){
@@ -67,6 +70,10 @@ void gamemap::output_map(){
     }
 }
 
-void gamemap::element_gen(){
-
+void gamemap::element_gen(int round){
+    if (round % 5 == 0){
+        srand(time(0));
+        std::string buff = "buff";
+        this->update_map(rand() / 20 % 20, rand()%20, buff);
+    }
 }
