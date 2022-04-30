@@ -74,6 +74,6 @@ void gamemap::element_gen(int round){
     if (round % 5 == 0){
         srand(time(0));
         std::string buff = "buff";
-        this->update_map(rand() / 20 % 20, rand()%20, buff);
+        update_map(rand() / 20 % 20, rand()%20, buff);
     }
 }

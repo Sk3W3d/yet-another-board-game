@@ -17,14 +17,21 @@ int main(){
     vector<character> players (player_num);
     for (int i = 0; i < player_num; i++){
         cout << "What role does player no. " << (i+1) << " want to play? ";
+        string role;
         // cin >> platers[i].role;
     }
     gamemap map;
     map.init_map();
     map.output_map();
     bool endgame = false;
+    int round = 0;
     while(!endgame){
+        round++;
+        cout << "Round " << round << endl;
+        for (int i = 0; i < player_num; i++){
+            // cout << "Now it's " << players[i].role << "'s turn. ";
 
+        }
     }
     return 0;
 }
