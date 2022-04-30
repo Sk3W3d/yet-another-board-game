@@ -9,6 +9,7 @@
 character::character(std::string role){
     coordinates = {0, 0};
     if (role == "Luke Skywalker"){
+        this->role = role;
         hp = 480;
         max_poe = 40;
         mass = 0.8;

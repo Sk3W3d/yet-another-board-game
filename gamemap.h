@@ -7,7 +7,7 @@ public:
 
     void init_map();
     void output_map();
-    void element_gen();
+    void element_gen(int);
     std::vector<std::vector<std::string>> get_map_content();
     void update_map(int i, int j, std::string str) {map_content[i][j] = str;};
 

@@ -14,11 +14,12 @@ int main(){
     cout << "Input player number: (no less than 2)";
     int player_num;
     cin >> player_num;
-    vector<character> players (player_num);
+    vector<character> players;
     for (int i = 0; i < player_num; i++){
         cout << "What role does player no. " << (i+1) << " want to play? ";
         string role;
-        // cin >> platers[i].role;
+        character new_character(role);
+        players.push_back(new_character);
     }
     gamemap map;
     map.init_map();
@@ -29,7 +30,7 @@ int main(){
         round++;
         cout << "Round " << round << endl;
         for (int i = 0; i < player_num; i++){
-            // cout << "Now it's " << players[i].role << "'s turn. ";
+            cout << "Now it's " << players[i].get_role() << "'s turn. ";
 
         }
     }
