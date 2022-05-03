@@ -9,3 +9,8 @@ character.o: character.cpp character.h
 
 game: gameplay.o gamemap.o character.o
 	g++ gameplay.o gamemap.o character.o -o game
+
+clean: 
+	rm *.o
+
+.PHONY: clean
