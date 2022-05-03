@@ -21,7 +21,7 @@ public:
 
     int get_hp() {return hp;};
     
-    void update_hp(int hp_change);
+    void update_hp(int hp_change) {hp += hp_change;};
 
     void update_health_buff(int update=-1);
 
