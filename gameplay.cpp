@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "gamemap.h"
 #include "character.h"
 
@@ -7,27 +8,67 @@
 
 using namespace std;
 
+void display_on_map(){
+
+}
+
 int main(){
     cout << "Welcome to yet another board game! \n";
     cout << "This is a board game based on Starwars elements. \n";
     cout << "For detailed game rules, please read https://github.com/Sk3W3d/yet-another-board-game\n";
     cout << "This is a command-based game. You need to type in commands during your turn to play the game\n";
-    cout << "Type help to view all commands. \n";
-    cout << "Input player number: (no less than 2)";
-    int player_num;
-    cin >> player_num;
+    cout << "Type help to view all commands. (after entering the game)\n";
+    cout << "Start a new game or read a game? (type \"start\" or \"read\"): ";
+    string gamestart;
+    cin >> gamestart;
+    int player_num, round;
     vector<character> players;
-    for (int i = 0; i < player_num; i++){
-        cout << "What role does player no. " << (i+1) << " want to play? ";
-        string role;
-        character new_character(role);
-        players.push_back(new_character);
-    }
     gamemap map;
     map.init_map();
-    map.output_map();
+
+    if (gamestart == "read"){
+        cout << "Read from which file? ";
+        string file;
+        cin >> file;
+        ifstream fin;
+        fin.open(file);
+        if ( fin.fail() ){
+            cout << "Error in file opening!" << endl;
+        }
+        // gamemap map;
+        // map.init_map();
+        fin >> player_num >> round;
+        for (int i = 0; i < player_num; i++){
+            string role;
+            fin >> role;
+            character new_character(role);
+            int hp, x, y, poe, health_buff;
+            new_character.set_hp(hp);
+            new_character.set_pos(x, y);
+            new_character.set_poe(poe);
+            new_character.set_health_buff(health_buff);
+            players.push_back(new_character);
+        }
+
+        fin.close();
+    }
+    else{
+        cout << "Input player number: (no less than 2)";
+        cin >> player_num;
+        for (int i = 0; i < player_num; i++){
+            cout << "What role does player no. " << (i+1) << " want to play? ";
+            string role;
+            character new_character(role);
+            players.push_back(new_character);
+        }
+        // gamemap map;
+        // map.init_map();
+        map.output_map();
+
+        int round = 0;
+    }
+
     bool endgame = false;
-    int round = 0;
     while(!endgame){
         round++;
         cout << "Round " << round << endl;
@@ -117,7 +158,25 @@ int main(){
                 } else if (cmd_input == "map")
                 {
                     map.output_map();
+                } else if (cmd_input == "save")
+                {
+                    ofstream fout;
+                    fout.open("save.txt");
+                    if ( fout.fail() ) {
+                        cout << "Error in file opening!" << endl;
+                        exit(1);
+                    }
+                    fout << player_num << " " << round << endl;
+
+                    for (int i = 0; i < player_num; i++){
+                        fout << players[i].get_role() << " " << players[i].get_hp() << " " << players[i].get_coordinates().x 
+                            << " " << players[i].get_coordinates().y << " " << players[i].get_poe() << " " 
+                            << players[i].get_health_buff() << endl;
+                    }
+
+                    fout.close();
                 }
+                
                 
                 
                 cin >> cmd_input;
