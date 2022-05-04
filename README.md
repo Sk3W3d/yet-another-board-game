@@ -12,9 +12,9 @@
  6. Temparary game status can be saved in an txt file and the players can resume the game. (code requirement 4)
 
 ## Game Development plan: 
- 1. Gamemap.cpp will be firstly developed. This cpp will generate the gamemap, and will contain the methods including gamemap output, random element generation, character position output, detect if the character is out of map. 
- 2. Gameplay.cpp will be then developed. This cpp will execute all gameplay logics, including creating a new game, choosing player number, playing the game, and storing and reading game status. 
- 3. Characters.cpp will be developed lastly. This cpp will record all properties and abilities of all characters. 
+ 1. gamemap.cpp will be firstly developed. This cpp will generate the gamemap, and will contain the methods including gamemap output, random element generation, character position output, detect if the character is out of map. 
+ 2. gameplay.cpp will be then developed. This cpp will execute all gameplay logics, including creating a new game, choosing player number, playing the game, and storing and reading game status. 
+ 3. character.cpp will be developed lastly. This cpp will record all properties and abilities of all characters. 
 
 ## --- The following is the game detail. ---
 #### The game details may change during the development process. 
@@ -26,8 +26,6 @@
 |                     |     ꁵ        |     U+A075                          |     Electric pole                         |   |
 |     buffs           |     +         |     U+002B                          |     Health recovery buff                  |   |
 |                     |     ▿         |     U+25BF                          |     Shield buff                           |   |
-|                     |     s         |     U+0053                          |     Power buff                            |   |
-|                     |     ×         |     U+00D7                          |     Revenge buff                          |   |
 |     (Jedi) Roles    |     ꆜ        |     U+A19C                          |     Luke Skywalker                        |   |
 |                     |     ꅧ        |     U+A167                          |     Han Solo                              |   |
 |                     |     ꀐ        |     U+A010                          |     Obi-wan Kenobi                        |   |
@@ -76,11 +74,6 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Overheat: 2.
         Deals 95 damage to all enemies within distance of 6. 
         Cannot penetrate walls.
-    Ability 2 (special): shield
-        POE consumption: 8.
-        Overheat: 1.
-        Absorb 40% damage received next time.
-        Superposition not allowed.
 
 ### Han Solo
     Related items: Mirror
@@ -144,15 +137,13 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     HP: 800
     Ability 1 (attack): fist of fury
         POE consumption: (-8)
-        Overheat: 2 (however the 2nd attack deals twice damage but POE becomes 25).
-        Deals 100 damage to one enemy within distance of 1.
+        Overheat: 1
+        Deals 125 damage to one enemy within distance of 1.
     Ability 2 (special): roar (available only when HP mot less than 180)
         POE consumption: 40
         Overheat: 1
         Pull all enemies within distance of 8 by distance of 3 (towards Chewbacca)
         Reset the POE storage of the enemies pulled.
-        Then add their mass by 0.8, last 3 turns
-        However, after this, Chewbacca cannot move his position in his next turn.
     Ability 3 (passive): savage
         Mass becomes 0.4 when HP less than 180.
 
@@ -263,11 +254,6 @@ Buffs will be randomly generated for every 5 rounds.
 HP += 50 at the start of next 2 turns.
 ### 7.2.	Shield buff
 Absorb the next damage.
-### 7.3.	Power buff
-POE get at the start of the next turn is multiplied by 3.
-### 7.4.	Revenge buff
-After receiving the next damage, apply 120% of it to the attacker.
-Note: one role cannot keep more than 1 working buffs at the same time.
 
 ## 8. That's all
 That is all for the rule of the text-based《Yet another board game》. Thanks for finish reading it, and we wish you have fun!
