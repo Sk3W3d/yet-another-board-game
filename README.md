@@ -216,21 +216,18 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         The conduct distance of poles are 5.
         Through this process, Darth Sidious’ attack can reach very far enemies.
         At most 7 poles are allowed to exist on the map simultaneously.
-        If excessive poles are placed, previous poles will be removed.
+        If excessive poles are placed, random poles will be removed.
     Max POE: 75
     Mass: 1.5
     HP: 520
     Ability 1 (attack): dark force lightening
         POE consumption: 15
-        Overheat: +∞ when current n == 1; otherwise becomes 1. (see n below)
-        Darth Sidious choose n reachable enemies to attack (n ≥ 1).
-        Deals 105 damage when n == 1.
-        Deals 120/n damage to every attacked enemy when n is more than 1.
-        Get 6 * (n-1) POE after attack.
+        Overheat: 2
+        Deals 105 damage to all reachable enemys.
     Ability 2 (special): chancellor power
         POE consumption: 12
         Overheat: +∞
-        Place a electric pole at current pixel.
+        Place a electric pole at current pixel and recover HP by 50.
     Ability 3 (passive): come back to life
         When Darth Sidious is defeated, he has 25% chance to immediately come back to life with 100 HP and previous POE.
 
