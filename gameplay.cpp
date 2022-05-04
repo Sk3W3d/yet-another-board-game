@@ -58,6 +58,7 @@ int main(){
         for (int i = 0; i < player_num; i++){
             cout << "What role does player no. " << (i+1) << " want to play? ";
             string role;
+            cin >> role;
             character new_character(role);
             players.push_back(new_character);
         }
