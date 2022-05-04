@@ -80,8 +80,8 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         When Han’s attack hits a mirror, it can be reflected to any direction.
         The direction is declared by another inputs of 2-D coordinates.
         The times one single attack can be reflected is not limited.
-        At most 10 mirrors are allowed to exist in the map simultaneously.
-        If excessive mirrors are placed, previous ones will be removed.
+        At most 5 mirrors are allowed to exist in the map simultaneously.
+        If excessive mirrors are placed, random ones will be removed.
     Max POE: 55
     Mass: 1.
     HP: 480.
@@ -214,7 +214,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Darth Sidious’s lightening can conduct among electric poles.
         The conduct distance of poles are 5.
         Through this process, Darth Sidious’ attack can reach very far enemies.
-        At most 7 poles are allowed to exist on the map simultaneously.
+        At most 5 poles are allowed to exist on the map simultaneously.
         If excessive poles are placed, random poles will be removed.
     Max POE: 75
     Mass: 1.5
