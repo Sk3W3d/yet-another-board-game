@@ -72,7 +72,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Ability 1 (attack): lightsaber 
         POE consumption: 12.
         Overheat: 2.
-        Deals 95 damage to all enemies within distance of 6. 
+        Deals 95 damage to all enemies within distance of 5. 
         Cannot penetrate walls.
 
 ### Han Solo
@@ -107,8 +107,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Regardless of walls.
         Obi-wan recovers HP of 50*(n-1), where n is the number of target hit by him.
     Ability 2 (special): force control
-        POE consumption: 15
-        Overheat: at most 4 times in total in one game!
+        POE consumption: 30
         Obi-wan directly get the nearest buff existing on the map.
 
 ### R2D2
@@ -121,11 +120,10 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Overheat: 1
         Set all entire blocks whose nearest pixel is within distance of 2 on fire.
         Deals 120 damage to all enemies in distance of 6 (nearest pixel) with the block.
-        If R2D2 is also in this range, it receives 60 damage.
     Ability 2 (special): robotic construction
-        POE consumption: 8
-        Overheat: 1
-        R2D2 constructs wall cells on 3 empty pixels within a distance of 5.
+        POE consumption: 2
+        Overheat: 3
+        R2D2 constructs wall cells on 1 empty pixel within a distance of 5.
     Ability 3 (passive): self repair
         R2D2 automatically recovers 10 HP at the beginning of its every turn.
         However the total HP of R2D2 cannot be no more than 550.
@@ -138,14 +136,14 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Ability 1 (attack): fist of fury
         POE consumption: (-8)
         Overheat: 1
-        Deals 125 damage to one enemy within distance of 1.
-    Ability 2 (special): roar (available only when HP mot less than 180)
+        Deals 125 damage to one enemy within distance of 3.
+    Ability 2 (special): roar (available only when HP not less than 180)
         POE consumption: 40
         Overheat: 1
         Pull all enemies within distance of 8 by distance of 3 (towards Chewbacca)
         Reset the POE storage of the enemies pulled.
     Ability 3 (passive): savage
-        Mass becomes 0.4 when HP less than 180.
+        Mass becomes 0.8 when HP less than 180.
 
 ### Darth Vader
     Related items: N/A
@@ -175,7 +173,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Deals 95 damage to every enemy within range of 4 when missile explodes.
         Destroy all cells of walls within this range. 
     Ability 2 (passive): special arm
-        When Jango receives damage : he applies 10% of it to every enemy within distance of 20, regardless of walls.
+        When Jango receives damage : he applies 10% of it to every enemy within distance of 10 at end of turn, regardless of walls.
     Ability 3 (passive):
         When Jango dies:his arming explodes and deals 200 damage to every enemy within distance 4.
         
@@ -193,7 +191,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Deals 70 damage to every enemy in distance of 5.
         Absorb the sum of the deduction of their HP.
     Ability 3 (passive): dodge
-        Damage to receive by Tusken Raider all have a 20% chance of missing.
+        have 10% chance to recover 50 HP at every end of his trun.
 
 ### Darth Maul
     Related items: N/A
@@ -234,14 +232,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Overheat: +∞
         Place a electric pole at current pixel.
     Ability 3 (passive): come back to life
-        When Darth Sidious’ HP is not more than 0 and not less than -150: 
-            His HP becomes 0;
-            His mass becomes 1.
-            Will not receive deduction of HP in the current turn.
-            He can still temporarily exist on the map.
-            In the next 3 rounds (not 3 turns), if his HP is always not less than -150:
-            His HP immediately becomes 520 and mass becomes 1.5 again.
-            The whole process is duplicatable.
+        When Darth Sidious is defeated, he has 25% chance to immediately come back to life with 100 HP and previous POE.
 
 ## 7. Buffs
 Roles can get buffs when they pass or stop at their pixels.
