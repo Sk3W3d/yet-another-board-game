@@ -166,15 +166,15 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Mass: 0.9
     HP: 400
     Ability 1 (attack): missile
-        POE consumption: 15
+        POE consumption: 13
         Overheat: 1
-        Missile path is a polyline not longer than 12 with not more than 2 breakpoints.
+        Launch a missile to any point within range of 10.
         Deals 95 damage to every enemy within range of 4 when missile explodes.
         Destroy all cells of walls within this range. 
     Ability 2 (passive): special arm
         When Jango receives damage : he applies 10% of it to every enemy within distance of 10 at end of turn, regardless of walls.
     Ability 3 (passive):
-        When Jango dies:his arming explodes and deals 200 damage to every enemy within distance 4.
+        When Jango dies:his arming explodes and deals 200 damage to every enemy within distance 4, regardless of walls.
         
 ### Tusken Raider
     Related Items: N/A
