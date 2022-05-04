@@ -119,7 +119,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Ability 1 (attack): arson
         POE consumption: 18
         Overheat: 1
-        Set an entire block of walls on fire, if there is pixel on it is within distance of 2.
+        Set all entire blocks whose nearest pixel is within distance of 2 on fire.
         Deals 120 damage to all enemies in distance of 6 (nearest pixel) with the block.
         If R2D2 is also in this range, it receives 60 damage.
     Ability 2 (special): robotic construction
