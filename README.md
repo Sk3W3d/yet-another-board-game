@@ -80,7 +80,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Mass: 1.
     HP: 480.
     Ability 1 (attack):
-        POE consumption: 15
+        POE consumption: 12
         Overheat: 2
         Deals 90 damage to one enemy.
         Cannot penetrate walls.
