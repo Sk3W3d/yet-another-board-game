@@ -154,8 +154,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         POE consumption: 25
         Overheat: 2
         Push all enemies within distance of 4 away from Vader by distance of 8.
-        Deals 20 damage.	
-        If targets hit walls in the process, they are stopped and receive 120 damage.
+        Deals 120 damage.	
     Ability 2 (special): dark force control
         POE consumption: 10
         Overheat: 1
