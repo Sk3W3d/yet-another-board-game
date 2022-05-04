@@ -22,8 +22,7 @@
 |                     |     Symbol    |     Unicode                         |     Meaning                               |   |
 |---------------------|---------------|-------------------------------------|-------------------------------------------|---|
 |     walls           |     █         |     U+2588                          |     (single cell of walls)                |   |
-|     Items           |     ▧         |     U+25A7                          |     mirror                                |   |
-|                     |     ꁵ        |     U+A075                          |     Electric pole                         |   |
+|     Items           |     ꁵ        |     U+A075                          |     Electric pole                         |   |
 |     buffs           |     +         |     U+002B                          |     Health recovery buff                  |   |
 |                     |     ▿         |     U+25BF                          |     Shield buff                           |   |
 |     (Jedi) Roles    |     ꆜ        |     U+A19C                          |     Luke Skywalker                        |   |
@@ -76,12 +75,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Cannot penetrate walls.
 
 ### Han Solo
-    Related items: Mirror
-        When Han’s attack hits a mirror, it can be reflected to any direction.
-        The direction is declared by another inputs of 2-D coordinates.
-        The times one single attack can be reflected is not limited.
-        At most 5 mirrors are allowed to exist in the map simultaneously.
-        If excessive mirrors are placed, random ones will be removed.
+    Related items: N/A
     Max POE: 55
     Mass: 1.
     HP: 480.
@@ -92,8 +86,8 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Cannot penetrate walls.
     Ability 2 (special): mirror
         POE consumption: 15
-        Overheat: 2
-        Han places a mirror at his current pixel.
+        Overheat: 1
+        Han interchange his position with any enemy.
 
 ### Obi-wan Kenobi
     Related items: N/A.
