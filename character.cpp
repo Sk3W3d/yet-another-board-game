@@ -215,4 +215,4 @@ bool penetrate_sd(character controller, Point start, Point direction, int distan
         end.y = controller.get_coordinates().y + (start.y == controller.get_coordinates().y ? 0 : abs(start.y - controller.get_coordinates().y) / (start.y - controller.get_coordinates().y));
     }
     return penetrate_se(start, end, map_content, intercept);
-
+}
