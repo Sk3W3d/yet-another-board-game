@@ -202,17 +202,17 @@ bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Po
 }
 
 
-// bool penetrate_sd(character controller, Point start, Point direction, int distance, vector<vector<string>> map_content, Point& intercept) {
-//     //sd: given start Point, distance and direction
-//     //note: only controlling skills call this function
-//     int dx = round((distance / distance_pp(direction, start)) * (direction.x - start.x));
-//     int dy = round((distance / distance_pp(direction, start)) * (direction.y - start.y));
-//     Point end;
-//     end.x = (start.x + dx <= 40 && start.x + dx >= 0) ? start.x + dx : (start.x + dx > 40 ? 40 : 0);
-//     end.y = (start.y + dy <= 20 && start.x + dx >= 0) ? start.x + dx : (start.x + dx > 20 ? 20 : 0);
-//     if ((end.x - controller.get_coordinates().x) * (start.x - controller.get_coordinates().x) < 0) {
-//         end.x = controller.get_coordinates().x + (start.x == controller.get_coordinates().x ? 0 : abs(start.x - controller.get_coordinates().x) / (start.x - controller.get_coordinates().x));
-//         end.y = controller.get_coordinates().y + (start.y == controller.get_coordinates().y ? 0 : abs(start.y - controller.get_coordinates().y) / (start.y - controller.get_coordinates().y));
-//     }
-//     return penetrate_se(start, end, map_content);
+bool penetrate_sd(character controller, Point start, Point direction, int distance, vector<vector<string>> map_content, Point& intercept) {
+    //sd: given start Point, distance and direction
+    //note: only controlling skills call this function
+    int dx = round((distance / distance_pp(direction, start)) * (direction.x - start.x));
+    int dy = round((distance / distance_pp(direction, start)) * (direction.y - start.y));
+    Point end;
+    end.x = (start.x + dx <= 40 && start.x + dx >= 0) ? start.x + dx : (start.x + dx > 40 ? 40 : 0);
+    end.y = (start.y + dy <= 20 && start.x + dx >= 0) ? start.x + dx : (start.x + dx > 20 ? 20 : 0);
+    if ((end.x - controller.get_coordinates().x) * (start.x - controller.get_coordinates().x) < 0) {
+        end.x = controller.get_coordinates().x + (start.x == controller.get_coordinates().x ? 0 : abs(start.x - controller.get_coordinates().x) / (start.x - controller.get_coordinates().x));
+        end.y = controller.get_coordinates().y + (start.y == controller.get_coordinates().y ? 0 : abs(start.y - controller.get_coordinates().y) / (start.y - controller.get_coordinates().y));
+    }
+    return penetrate_se(start, end, map_content, intercept);
 

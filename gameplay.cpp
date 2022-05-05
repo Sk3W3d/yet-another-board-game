@@ -79,10 +79,12 @@ int main(){
             cout << "What role does player no. " << (i+1) << " want to play? (input full name)";
             string role;
             role_input: cin >> role;
-            if (!roles->find(role)){
-                cout << "invalid role. please re-input. \n";
-                goto role_input;
+            bool role_exist = false;
+            for (int j = 0; j < role.size(); j++)
+            {
+                if (role == roles[j]) role_exist = true;
             }
+            if (!role_exist) goto role_input;
             character new_character(role);
             players.push_back(new_character);
         }

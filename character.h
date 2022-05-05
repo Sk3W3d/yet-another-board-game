@@ -62,6 +62,7 @@ double min_distance(double x, double y, vector<vector<string>> map_content);
 double distance_pl(Point x, Point a, Point b);
 double distance_pp(Point x, Point y);
 bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Point &intercept);
+bool penetrate_sd(character controller, Point start, Point direction, int distance, vector<vector<string>> map_content, Point& intercept);
 
 
 
