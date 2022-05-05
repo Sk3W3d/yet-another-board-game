@@ -154,7 +154,7 @@ bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Po
         for (int i = start.y; i != end.y; i += abs(end.y - start.y)/(end.y - start.y)) {
             if (map_content[20 - i][start.x - 1] == WALL){
                 intercept.x = start.x;
-                intercept.y = end.y > start.y ? 19 - i : 21 - i;
+                intercept.y = end.y > start.y ? 21 - i : 19 - i;
                 return false;
             }
         }

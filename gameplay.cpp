@@ -115,10 +115,11 @@ int main(){
                     cout << "Please input the relative coordinates of the position you want to move to: (2 integers)";
                     int x, y;
                     cin >> x >> y;
-                    if ((players[i].get_coordinates().x + x) < 0 || (players[i].get_coordinates().x + x) >= map.get_map_content()[0].size()
-                        || (players[i].get_coordinates().y + y) < 0 || (players[i].get_coordinates().y + y) >= map.get_map_content().size())
+                    if ((players[i].get_coordinates().x + x) <= 0 || (players[i].get_coordinates().x + x) > map.get_map_content()[0].size()
+                        || (players[i].get_coordinates().y + y) <= 0 || (players[i].get_coordinates().y + y) > map.get_map_content().size())
                     {
                         cout << "You are moving out of map. Invalid input. \n";
+                        // cin >> cmd_input;
                         continue;
                     }
                     Point destination = {players[i].get_coordinates().x + x, players[i].get_coordinates().y + y};
