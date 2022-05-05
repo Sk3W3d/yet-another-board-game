@@ -177,7 +177,8 @@ bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Po
         index--;
         for (int i = 0; i <= index - 1; i++) {
             for (int j = 0; j <= index - 1 - i; j++) {
-                double x1, y1, x2, y2 = intersection[j][0], intersection[j][1], intersection[j + 1][0], intersection[j + 1][1];
+                double x1 = intersection[j][0], y1 = intersection[j][1], 
+                    x2 = intersection[j + 1][0], y2 = intersection[j + 1][1];
                 if (pow(x1 - start.x, 2) + pow(y1 - start.y, 2) > pow(x2 - start.x, 2) + pow(y2 - start.y, 2)) {
                     double temp[2] = {intersection[j][0], intersection[j][1]};
                     intersection[j][0] = intersection[j + 1][0], intersection[j][1] = intersection[j + 1][1];
