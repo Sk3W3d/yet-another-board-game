@@ -3,6 +3,7 @@
 #define CHARACTER_H
 
 #include <string>
+#include <vector>
 
 struct Point {int x, y;};
 
@@ -54,6 +55,8 @@ private:
     int health_buff;
     std::string symbol;
 };
+
+using namespace std;
 
 double min_distance(double x, double y, vector<vector<string>> map_content);
 double distance_pl(Point x, Point a, Point b);

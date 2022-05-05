@@ -114,7 +114,7 @@ int main(){
                     cin >> x >> y;
                     Point destination = {players[i].get_coordinates().x - y, players[i].get_coordinates().y + x};
                     Point intercept;
-                    if (penetrate_se(players[i].get_coordinates(), destination, intercept)){
+                    if (penetrate_se(players[i].get_coordinates(), destination, map.get_map_content(), intercept)){
                         players[i].set_poe(players[i].get_poe() - players[i].get_mass() * distance_pp(players[i].get_coordinates(), destination));
                         players[i].set_pos(destination.x, destination.y);
                         cout << "Movement successful. ";
