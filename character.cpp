@@ -184,7 +184,7 @@ bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Po
         }
         for (int j = start.y; j != end.y; j += (abs(end.y - start.y)) / (end.y - start.y)) {
             //y-coordinate of intersection is j+0.5 (intersections on horizontal lines)
-            intersection[index][0] = start.x + ((end.x - start.x) / (end.y - start.y)) * (j + dy - start.y) , intersection[index][1] = j + dy;
+            intersection[index][0] = start.x + (double(end.x - start.x) / double(end.y - start.y)) * double(j + dy - start.y) , intersection[index][1] = j + dy;
             index++;
         }
         //the 2 "for" loops above: add all intersections of the line start-end and the map gridding to the array.
