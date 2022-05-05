@@ -122,6 +122,7 @@ int main(){
                         continue;
                     }
                     Point destination = {players[i].get_coordinates().x - y, players[i].get_coordinates().y + x};
+                    cout << "Destination: " << destination.x << ", " << destination.y << endl;
                     Point intercept;
                     if (penetrate_se(players[i].get_coordinates(), destination, map.get_map_content(), intercept)){
                         players[i].set_poe(players[i].get_poe() - players[i].get_mass() * distance_pp(players[i].get_coordinates(), destination));
