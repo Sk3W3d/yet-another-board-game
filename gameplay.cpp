@@ -8,8 +8,24 @@
 
 using namespace std;
 
-void display_on_map(){
+void refresh_map_display(gamemap map, vector<character> characters){
+    for (int i = 0; i < map.get_map_content().size(); i++){
+        for (int j = 0; j < map.get_map_content()[0].size(); j++){
+            for (int k = 0; k < characters.size(); k++){
+                if (map.get_map_content()[i][j] == characters[k].get_role()){
+                    map.update_map(i, j, "");
+                }
+            }                    
+        }
+    }
+    
+    for (int k = 0; k < characters.size(); k++){
+        if (characters[k].get_hp()){
+            map.update_map(characters[k].get_coordinates().x, characters[k].get_coordinates().y, characters[k].get_role());
+        }
+    }
 
+    map.output_map();
 }
 
 int main(){
@@ -54,11 +70,19 @@ int main(){
     }
     else{
         cout << "Input player number: (no less than 2)";
+        cout << "Valid characters include {\"LukeSkywalker\", \"HanSolo\", \"Obi-wanKenobi\", \"R2D2\", \"Chewbacca\", "
+            << "\"DarthVader\", \"JangoFett\", \"TuskenRaider\", \"DarthMaul\", \"DarthSidious\"}\n";
+        const string roles[] = {"LukeSkywalker", "HanSole", "Obi-wanKenobi", "R2D2", "Chewbacca", 
+            "DarthVader", "JangoFett", "TuskenRaider", "DarthMaul", "DarthSidious"};
         cin >> player_num;
         for (int i = 0; i < player_num; i++){
-            cout << "What role does player no. " << (i+1) << " want to play? ";
+            cout << "What role does player no. " << (i+1) << " want to play? (input full name)";
             string role;
-            cin >> role;
+            role_input: cin >> role;
+            if (!roles->find(role)){
+                cout << "invalid role. please re-input. \n";
+                goto role_input;
+            }
             character new_character(role);
             players.push_back(new_character);
         }
@@ -84,6 +108,24 @@ int main(){
             while (cmd_input != "end")
             {
                 if (cmd_input == "move"){
+                    // RELATIVE COORDINATES INPUT
+                    cout << "Please input the relative coordinates of the position you want to move to: (2 integers)";
+                    int x, y;
+                    cin >> x >> y;
+                    Point destination = {players[i].get_coordinates().x - y, players[i].get_coordinates().y + x};
+                    Point intercept;
+                    if (penetrate_se(players[i].get_coordinates(), destination, intercept)){
+                        players[i].set_poe(players[i].get_poe() - players[i].get_mass() * distance_pp(players[i].get_coordinates(), destination));
+                        players[i].set_pos(destination.x, destination.y);
+                        cout << "Movement successful. ";
+                    } else {
+                        cout << "Movement uncessful. You hit the wall. Current position: ";
+                        players[i].set_poe(players[i].get_poe() - players[i].get_mass() * distance_pp(players[i].get_coordinates(), intercept));
+                        players[i].set_pos(intercept.x, intercept.y);
+                    }
+                    refresh_map_display(map, players);
+
+
                     /*
                     // coordinates input (reserved, not used)
                     cout << "Input the coordinates that you would like to move to\n"; 
@@ -95,7 +137,11 @@ int main(){
                     players[i].update_pos(x, y);
                     **/
 
+
+
                     // wasd input
+
+                    /*
                     string movement_wasd;
                     cin >> movement_wasd;
 
@@ -150,9 +196,27 @@ int main(){
                     map.update_map(players[i].get_coordinates().x, players[i].get_coordinates().y, players[i].get_symbol());
                     map.output_map();
 
-                } else if (cmd_input == "attack")
+                    **/
+
+
+
+                } else if (cmd_input == "skill")
                 {
-                    /* code */
+                    if (players[i].get_role() == "LukeSkywalker"){
+
+                    } else if (players[i].get_role() == "HanSolo")
+                    {
+                        /* code */
+                    } else if (players[i].get_role() == "Obi-wanKenobi")
+                    {
+                        /* code */
+                    } else if (players[i].get_role() == "R2D2")
+                    {
+                        /* code */
+                    }
+                    
+                    
+                    
                 } else if (cmd_input == "status")
                 {
                     players[i].display_status();

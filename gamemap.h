@@ -1,4 +1,7 @@
 // gamemap.h
+#ifndef GAMEMAP_H 
+#define GAMEMAP_H
+
 #include <string>
 #include <vector>
 
@@ -22,3 +25,5 @@ private:
     std::vector<std::vector<std::string>> map_content;
 
 };
+
+#endif

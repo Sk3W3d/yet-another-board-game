@@ -74,6 +74,10 @@ void gamemap::element_gen(int round){
     if (round % 5 == 0){
         srand(time(0));
         std::string buff = "\u002B";
-        update_map(rand() / 20 % 20, rand()%20, buff);
+        int x = rand() / 20 % 20, y = rand()%20;
+        while (map_content[x][y] == WALL){
+            x = rand() / 20 % 20, y = rand()%20;
+        }
+        update_map(x, y, buff);
     }
 }

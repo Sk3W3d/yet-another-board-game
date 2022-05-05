@@ -11,6 +11,6 @@ game: gameplay.o gamemap.o character.o
 	g++ gameplay.o gamemap.o character.o -o game
 
 clean: 
-	rm *.o
+	rm *.o game
 
 .PHONY: clean

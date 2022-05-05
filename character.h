@@ -1,4 +1,7 @@
 // character.h
+#ifndef CHARACTER_H 
+#define CHARACTER_H
+
 #include <string>
 
 struct Point {int x, y;};
@@ -39,13 +42,24 @@ public:
 
     std::string get_symbol() {return symbol;};
 
+    double get_mass() {return mass;};
+
 private:
     std::string role;
     Point coordinates;
     int hp;
     int max_poe;
     int poe;
-    int mass;
+    double mass;
     int health_buff;
     std::string symbol;
 };
+
+double min_distance(double x, double y, vector<vector<string>> map_content);
+double distance_pl(Point x, Point a, Point b);
+double distance_pp(Point x, Point y);
+bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Point &intercept);
+
+
+
+#endif
