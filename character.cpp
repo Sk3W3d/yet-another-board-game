@@ -151,22 +151,26 @@ bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Po
         return true;
     }
     else if (start.x == end.x) {
+        intercept.x = start.x;        
         for (int i = start.y; i != end.y; i += abs(end.y - start.y)/(end.y - start.y)) {
             if (map_content[20 - i][start.x - 1] == WALL){
-                intercept.x = start.x;
                 intercept.y = end.y > start.y ? 21 - i : 19 - i;
                 return false;
             }
         }
+        intercept.y = end.y;
+        return true;
     }
     else if (start.y == end.y) {
+        intercept.y = start.y;
         for (int i = start.x; i != end.x; i += abs(end.x - start.x)/(end.x - start.x)) {
             if (map_content[20 - start.y][i - 1] == WALL) {
                 intercept.x = end.x > start.x ? i - 1 : i + 1;
-                intercept.y = start.y;
                 return false;
             }
         }
+        intercept.x = end.x;
+        return true;
     }
     else {
         double intersection[58][2];
@@ -180,7 +184,7 @@ bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Po
         }
         for (int j = start.y; j != end.y; j += (abs(end.y - start.y)) / (end.y - start.y)) {
             //y-coordinate of intersection is j+0.5 (intersections on horizontal lines)
-            intersection[index][0] = start.x + ((end.x - start.x) / (end.y - start.y)) * (j + dy - start.y) , intersection[index][0] = j + dy;
+            intersection[index][0] = start.x + ((end.x - start.x) / (end.y - start.y)) * (j + dy - start.y) , intersection[index][1] = j + dy;
             index++;
         }
         //the 2 "for" loops above: add all intersections of the line start-end and the map gridding to the array.
