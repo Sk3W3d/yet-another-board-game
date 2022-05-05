@@ -72,7 +72,7 @@ int main(){
         cout << "Input player number: (no less than 2)";
         cout << "Valid characters include {\"LukeSkywalker\", \"HanSolo\", \"Obi-wanKenobi\", \"R2D2\", \"Chewbacca\", "
             << "\"DarthVader\", \"JangoFett\", \"TuskenRaider\", \"DarthMaul\", \"DarthSidious\"}\n";
-        const string roles[] = {"LukeSkywalker", "HanSole", "Obi-wanKenobi", "R2D2", "Chewbacca", 
+        const string roles[] = {"LukeSkywalker", "HanSolo", "Obi-wanKenobi", "R2D2", "Chewbacca", 
             "DarthVader", "JangoFett", "TuskenRaider", "DarthMaul", "DarthSidious"};
         cin >> player_num;
         for (int i = 0; i < player_num; i++){
@@ -92,7 +92,7 @@ int main(){
         // map.init_map();
         map.output_map();
 
-        int round = 0;
+        round = 0;
     }
 
     bool endgame = false;
@@ -114,6 +114,12 @@ int main(){
                     cout << "Please input the relative coordinates of the position you want to move to: (2 integers)";
                     int x, y;
                     cin >> x >> y;
+                    if ((players[i].get_coordinates().x - y) < 0 || (players[i].get_coordinates().x - y) > map.get_map_content()[0].size()
+                        || (players[i].get_coordinates().y + x) < 0 || (players[i].get_coordinates().y + x) > map.get_map_content().size())
+                    {
+                        cout << "You are moving out of map. Invalid input. \n";
+                        break;
+                    }
                     Point destination = {players[i].get_coordinates().x - y, players[i].get_coordinates().y + x};
                     Point intercept;
                     if (penetrate_se(players[i].get_coordinates(), destination, map.get_map_content(), intercept)){
