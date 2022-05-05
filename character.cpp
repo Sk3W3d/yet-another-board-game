@@ -179,7 +179,7 @@ bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Po
         double dy = end.y > start.y ? 0.5 : -0.5;
         for (int i = start.x; i != end.x; i += (abs(end.x - start.x)) / (end.x - start.x)) {
             //x-coordinate of intersection is i+0.5 (intersection on vertical lines)
-            intersection[index][0] = i + dx , intersection[index][1] = start.y + ((end.y - start.y) / (end.x - start.x)) * (i + dx - start.x);
+            intersection[index][0] = i + dx , intersection[index][1] = start.y + (double(end.y - start.y) / double(end.x - start.x)) * double(i + dx - start.x);
             index++;
         }
         for (int j = start.y; j != end.y; j += (abs(end.y - start.y)) / (end.y - start.y)) {
@@ -193,7 +193,7 @@ bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Po
             for (int j = 0; j <= index - 1 - i; j++) {
                 double x1 = intersection[j][0], y1 = intersection[j][1], 
                     x2 = intersection[j + 1][0], y2 = intersection[j + 1][1];
-                if (pow(x1 - start.x, 2) + pow(y1 - start.y, 2) > pow(x2 - start.x, 2) + pow(y2 - start.y, 2)) {
+                if ((pow(x1 - start.x, 2) + pow(y1 - start.y, 2)) > (pow(x2 - start.x, 2) + pow(y2 - start.y, 2))) {
                     double temp[2] = {intersection[j][0], intersection[j][1]};
                     intersection[j][0] = intersection[j + 1][0], intersection[j][1] = intersection[j + 1][1];
                     intersection[j + 1][0] = temp[0], intersection[j + 1][1] = temp[1];
