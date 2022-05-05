@@ -21,7 +21,7 @@ void refresh_map_display(gamemap map, vector<character> characters){
     
     for (int k = 0; k < characters.size(); k++){
         if (characters[k].get_hp()){
-            map.update_map(characters[k].get_coordinates().x, characters[k].get_coordinates().y, characters[k].get_symbol());
+            map.update_map(20-characters[k].get_coordinates().y, characters[k].get_coordinates().x-1, characters[k].get_symbol());
         }
     }
 
@@ -115,23 +115,25 @@ int main(){
                     cout << "Please input the relative coordinates of the position you want to move to: (2 integers)";
                     int x, y;
                     cin >> x >> y;
-                    if ((players[i].get_coordinates().x - y) < 0 || (players[i].get_coordinates().x - y) > map.get_map_content()[0].size()
-                        || (players[i].get_coordinates().y + x) < 0 || (players[i].get_coordinates().y + x) > map.get_map_content().size())
+                    if ((players[i].get_coordinates().x + x) < 0 || (players[i].get_coordinates().x + x) >= map.get_map_content()[0].size()
+                        || (players[i].get_coordinates().y + y) < 0 || (players[i].get_coordinates().y + y) >= map.get_map_content().size())
                     {
                         cout << "You are moving out of map. Invalid input. \n";
                         continue;
                     }
-                    Point destination = {players[i].get_coordinates().x - y, players[i].get_coordinates().y + x};
+                    Point destination = {players[i].get_coordinates().x + x, players[i].get_coordinates().y + y};
                     cout << "Destination: " << destination.x << ", " << destination.y << endl;
                     Point intercept;
                     if (penetrate_se(players[i].get_coordinates(), destination, map.get_map_content(), intercept)){
                         players[i].set_poe(players[i].get_poe() - players[i].get_mass() * distance_pp(players[i].get_coordinates(), destination));
                         players[i].set_pos(destination.x, destination.y);
-                        cout << "Movement successful. Current position: \n";
+                        cout << "Movement successful. Current position: " << destination.x << ", " << destination.y << endl;
+                        cout << "Remaining POE: " << players[i].get_poe() << endl;
                     } else {
-                        cout << "Movement uncessful. You hit the wall. Current position: \n";
+                        cout << "Movement uncessful. You hit the wall. Current position: " << intercept.x << ", " << intercept.y << endl;
                         players[i].set_poe(players[i].get_poe() - players[i].get_mass() * distance_pp(players[i].get_coordinates(), intercept));
                         players[i].set_pos(intercept.x, intercept.y);
+                        cout << "Remaining POE: " << players[i].get_poe() << endl;
                     }
                     refresh_map_display(map, players);
 
