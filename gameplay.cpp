@@ -12,7 +12,7 @@ void refresh_map_display(gamemap map, vector<character> characters){
     for (int i = 0; i < map.get_map_content().size(); i++){
         for (int j = 0; j < map.get_map_content()[0].size(); j++){
             for (int k = 0; k < characters.size(); k++){
-                if (map.get_map_content()[i][j] == characters[k].get_role()){
+                if (map.get_map_content()[i][j] == characters[k].get_symbol()){
                     map.update_map(i, j, "");
                 }
             }                    
@@ -21,7 +21,7 @@ void refresh_map_display(gamemap map, vector<character> characters){
     
     for (int k = 0; k < characters.size(); k++){
         if (characters[k].get_hp()){
-            map.update_map(characters[k].get_coordinates().x, characters[k].get_coordinates().y, characters[k].get_role());
+            map.update_map(characters[k].get_coordinates().x, characters[k].get_coordinates().y, characters[k].get_symbol());
         }
     }
 
@@ -98,6 +98,7 @@ int main(){
     bool endgame = false;
     while(!endgame){
         round++;
+        refresh_map_display(map, players);
         cout << "Round " << round << endl;
         for (int i = 0; i < player_num; i++){
             if (players[i].get_hp() <= 0) continue;
@@ -125,9 +126,9 @@ int main(){
                     if (penetrate_se(players[i].get_coordinates(), destination, map.get_map_content(), intercept)){
                         players[i].set_poe(players[i].get_poe() - players[i].get_mass() * distance_pp(players[i].get_coordinates(), destination));
                         players[i].set_pos(destination.x, destination.y);
-                        cout << "Movement successful. ";
+                        cout << "Movement successful. Current position: \n";
                     } else {
-                        cout << "Movement uncessful. You hit the wall. Current position: ";
+                        cout << "Movement uncessful. You hit the wall. Current position: \n";
                         players[i].set_poe(players[i].get_poe() - players[i].get_mass() * distance_pp(players[i].get_coordinates(), intercept));
                         players[i].set_pos(intercept.x, intercept.y);
                     }
@@ -231,6 +232,7 @@ int main(){
                 } else if (cmd_input == "map")
                 {
                     map.output_map();
+                    refresh_map_display(map, players);
                 } else if (cmd_input == "save")
                 {
                     ofstream fout;
