@@ -21,42 +21,42 @@ character::character(std::string role){
         max_poe = 40;
         mass = 0.8;
         symbol = "\uA19C";
-        coordinates = {4, 4};
+        coordinates = {4, 5};
     } else if (role == "HanSolo")
     {
         hp = 480;
         max_poe = 55;
         mass = 1;
         symbol = "\uA167";
-        coordinates = {8, 4};
+        coordinates = {4, 10};
     } else if (role == "Obi-wanKenobi")
     {
         hp = 580;
         max_poe = 60;
         mass = 1.2;
         symbol = "\uA010";
-        coordinates = {12, 4};
+        coordinates = {4, 15};
     } else if (role == "R2D2")
     {
         hp = 580;
         max_poe = 60;
         mass = 1.2;
         symbol = "\uA010";
-        coordinates = {16, 4};
+        coordinates = {8, 5};
     } else if (role == "Chewbacca")
     {
         hp = 800;
         max_poe = 100;
         mass = 2;
         symbol = "\uA12C";
-        coordinates = {4, 8};
+        coordinates = {8, 10};
     } else if (role == "DarthVader")
     {
         hp = 480;
         max_poe = 50;
         mass = 1.1;
         symbol = "\uA111";
-        coordinates = {8, 8};
+        coordinates = {8, 15};
     } else if (role == "JangoFett")
     {
         hp = 400;
@@ -77,14 +77,14 @@ character::character(std::string role){
         max_poe = 40;
         mass = 1;
         symbol = "\uA389";
-        coordinates = {8, 18};
+        coordinates = {38, 10};
     } else if (role == "DarthSidious")
     {
         hp = 520;
         max_poe = 75;
         mass = 1.5;
         symbol = "\uA421";
-        coordinates = {12, 18};
+        coordinates = {38, 15};
     }
     
     
