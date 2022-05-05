@@ -92,7 +92,7 @@ character::character(std::string role){
 
 int character::poe_gen(){
     srand(time(0));
-    int roll = rand()%6;
+    int roll = rand()%6 + 1;
     std::cout << "You rolled " << roll << "! \n";
     poe = std::min(max_poe, poe+roll);
     std::cout << "You now have POE of " << poe << ". \n";
@@ -200,7 +200,7 @@ bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Po
         for (int t = 0; t <= index; t++) {
             if (min_distance(intersection[t][0], intersection[t][1], map_content) <= 0.72){ //slightly larger the sqrt(1/2)
                 intercept.x = round(intersection[t][0] - dx);
-                intercept.y = round(intersection[t][0] - dy);
+                intercept.y = round(intersection[t][1] - dy);
                 //intercept: the pixel at which the controlled character's movement is stopped by wall.
                 return false;
             }
