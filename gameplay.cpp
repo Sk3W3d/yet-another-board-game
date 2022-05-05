@@ -118,7 +118,7 @@ int main(){
                         || (players[i].get_coordinates().y + x) < 0 || (players[i].get_coordinates().y + x) > map.get_map_content().size())
                     {
                         cout << "You are moving out of map. Invalid input. \n";
-                        break;
+                        continue;
                     }
                     Point destination = {players[i].get_coordinates().x - y, players[i].get_coordinates().y + x};
                     Point intercept;
