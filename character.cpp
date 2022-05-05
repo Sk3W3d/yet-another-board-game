@@ -152,9 +152,9 @@ bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Po
     }
     else if (start.x == end.x) {
         intercept.x = start.x;        
-        for (int i = start.y; i != end.y; i += abs(end.y - start.y)/(end.y - start.y)) {
+        for (int i = start.y; i != end.y+ abs(end.y - start.y)/(end.y - start.y); i += abs(end.y - start.y)/(end.y - start.y)) {
             if (map_content[20 - i][start.x - 1] == WALL){
-                intercept.y = end.y > start.y ? 21 - i : 19 - i;
+                intercept.y = end.y > start.y ? i - 1 : i + 1;
                 return false;
             }
         }
@@ -163,7 +163,7 @@ bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Po
     }
     else if (start.y == end.y) {
         intercept.y = start.y;
-        for (int i = start.x; i != end.x; i += abs(end.x - start.x)/(end.x - start.x)) {
+        for (int i = start.x; i != end.x+ abs(end.x - start.x)/(end.x - start.x); i += abs(end.x - start.x)/(end.x - start.x)) {
             if (map_content[20 - start.y][i - 1] == WALL) {
                 intercept.x = end.x > start.x ? i - 1 : i + 1;
                 return false;
@@ -197,6 +197,7 @@ bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Po
                     double temp[2] = {intersection[j][0], intersection[j][1]};
                     intersection[j][0] = intersection[j + 1][0], intersection[j][1] = intersection[j + 1][1];
                     intersection[j + 1][0] = temp[0], intersection[j + 1][1] = temp[1];
+                    // swap(intersection[j], intersection[j+1]);
                 }
             }
             //nested loop above: sort the intersection Points in the array by their distance to the start Point. 
