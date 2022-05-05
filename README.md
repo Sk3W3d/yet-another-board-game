@@ -95,11 +95,11 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Mass: 1.2.
     HP: 580.
     Ability 1 (attack): the force
-        POE consumption: 7
+        POE consumption: 10
         Overheat: 1
-        Deals 70 damage to every enemy within range of 7.
+        Deals 70 damage to every enemy within range of 6.
         Regardless of walls.
-        Obi-wan recovers HP of 50*(n-1), where n is the number of target hit by him.
+        Obi-wan recovers HP of 40*(n-1), where n is the number of target hit by him.
     Ability 2 (special): force control
         POE consumption: 30
         Obi-wan directly get the nearest buff existing on the map.
@@ -112,12 +112,12 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Ability 1 (attack): arson
         POE consumption: 18
         Overheat: 1
-        Set all entire blocks whose nearest pixel is within distance of 2 on fire.
-        Deals 120 damage to all enemies in distance of 6 (nearest pixel) with the block.
+        Set all walls in the map on fire.
+        Deals 120 damage to all enemies in distance of 3 (nearest pixel) with the block.
     Ability 2 (special): robotic construction
-        POE consumption: 2
+        POE consumption: 3
         Overheat: 3
-        R2D2 constructs wall cells on 1 empty pixel within a distance of 5.
+        R2D2 constructs a wall cell on its upper cell if it's empty.
     Ability 3 (passive): self repair
         R2D2 automatically recovers 10 HP at the beginning of its every turn.
         However the total HP of R2D2 cannot be no more than 550.
