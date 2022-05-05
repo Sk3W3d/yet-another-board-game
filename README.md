@@ -147,8 +147,8 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Ability 1 (attack): dark force
         POE consumption: 25
         Overheat: 2
-        Push all enemies within distance of 4 away from Vader by distance of 5.
-        Deals 120 damage.	
+        Push all enemies within distance of 4 away from Vader by distance of 5. Deals 30 damage.
+        If these enemies hit walls during forced moving, they are dealt additional 120 damage.	
     Ability 2 (special): dark force control
         POE consumption: 10
         Overheat: 1
@@ -186,7 +186,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Deals 70 damage to every enemy in distance of 4. Regarless of walls.
         Absorb the sum of the deduction of their HP.
     Ability 3 (passive): dodge
-        have 10% chance to recover 50 HP at every end of his trun.
+        Have 25% chance to dodge any damage applied to him.
 
 ### Darth Maul
     Related items: N/A
