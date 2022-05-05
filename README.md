@@ -223,7 +223,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Ability 2 (special): chancellor power
         POE consumption: 15
         Overheat: +∞
-        Place a electric pole at current pixel and recover HP by 50.
+        Place a electric pole on his upper pixel (if it is empty) and recover HP by 50.
     Ability 3 (passive): come back to life
         When Darth Sidious is defeated, he has 25% chance to immediately come back to life with 260 HP and previous POE.
 
