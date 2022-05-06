@@ -141,7 +141,6 @@ int main(){
             int counter1=0, counter2=0;
             while (cmd_input != "end")
             {
-                cout << "Input your next command: (move, skill, map, status, end, save)\n";
                 if (cmd_input == "help"){
                     cout << "The main commands include: move, skill, map, status, and save. You may enter these commands and the detailed instruction will be shown. \n";
                     cout << "Input end to end your turn. Input exit as command to exit the game. \n";
@@ -496,7 +495,7 @@ int main(){
                 }
                 
                 
-                
+                cout << "Input your next command: (move, skill, map, status, end, save, and exit)\n";
                 cin >> cmd_input;
             }
             

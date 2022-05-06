@@ -398,7 +398,7 @@ void HanSolo_2(vector<character> &living) {
         cout << "possible choices: ";
         for (int i = 0; i < living.size(); i++) {
             if ((living[i].get_role() != "HanSolo") && living[i].life) {
-                cout << i << ":" << living[i].get_role();
+                cout << i << ":" << living[i].get_role() << "  ";
             }
         }
         cout << endl << "enter your choice: ";
@@ -417,7 +417,7 @@ void HanSolo_2(vector<character> &living) {
             living[search("HanSolo", living)].set_pos(living[atoi(choice)].get_coordinates().x, living[atoi(choice)].get_coordinates().y);
             living[atoi(choice)].set_pos(copy.x, copy.y);
             living[search("HanSolo", living)].consume_poe(15);
-            cout << "success!" << endl << "now your POE is " << living[search("HanSolo", living)].get_poe();
+            cout << "success!" << endl << "now your POE is " << living[search("HanSolo", living)].get_poe() << endl;
         }
         else {
             cout << "your POE (points of energy) is not enough!" << endl;
@@ -590,10 +590,10 @@ void JangoFett_1(vector<vector<string>> &map_content, vector<character> &living,
         cout << "input a direction (two integer split by space). \n";
         cout << " example: input '1 1' to indecate the direction towards 45 degrees to the upper right. \n";
         char x, y;
-        cin >> x, y;
+        cin >> x >> y;
         while (!isdigit(x) || !isdigit(y) || (x == 0 && y == 0)) {
             cout << "please input a valid value!" << endl;
-            cin >> x, y;
+            cin >> x >> y;
         }
         direction.x = x;
         direction.y = y;
