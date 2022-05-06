@@ -27,6 +27,12 @@ character::character(std::string role){
         mass = 0.8;
         symbol = "\uA19C";
         coordinates = {4, 5};
+        damage = 95;
+        distance = 5;
+        penetrate = false;
+        control = false;
+        inward = false;
+        control_distance = 0;
     } else if (role == "HanSolo")
     {
         hp = 480;
@@ -34,6 +40,12 @@ character::character(std::string role){
         mass = 1;
         symbol = "\uA167";
         coordinates = {4, 10};
+        damage = 90;
+        distance = 5; // will not be visited
+        penetrate = false;
+        control = false;
+        inward = false;
+        control_distance = 0;
     } else if (role == "Obi-wanKenobi")
     {
         hp = 580;
@@ -41,6 +53,12 @@ character::character(std::string role){
         mass = 1.2;
         symbol = "\uA010";
         coordinates = {4, 15};
+        damage = 70;
+        distance = 6; 
+        penetrate = true;
+        control = false;
+        inward = false;
+        control_distance = 0;
     } else if (role == "R2D2")
     {
         hp = 580;
@@ -48,6 +66,12 @@ character::character(std::string role){
         mass = 1.2;
         symbol = "\uA010";
         coordinates = {8, 5};
+        damage = 120;
+        distance = 3; 
+        penetrate = true;
+        control = false;
+        inward = false;
+        control_distance = 0;
     } else if (role == "Chewbacca")
     {
         hp = 800;
@@ -55,6 +79,12 @@ character::character(std::string role){
         mass = 2;
         symbol = "\uA12C";
         coordinates = {8, 10};
+        damage = 125;
+        distance = 2; 
+        penetrate = true;
+        control = false;
+        inward = false;
+        control_distance = 0;
     } else if (role == "DarthVader")
     {
         hp = 480;
@@ -62,6 +92,12 @@ character::character(std::string role){
         mass = 1.1;
         symbol = "\uA111";
         coordinates = {8, 15};
+        damage = 30;
+        distance = 4; 
+        penetrate = true;
+        control = true;
+        inward = false;
+        control_distance = 5;
     } else if (role == "JangoFett")
     {
         hp = 400;
@@ -83,6 +119,12 @@ character::character(std::string role){
         mass = 1;
         symbol = "\uA389";
         coordinates = {38, 10};
+        damage = 80;
+        distance = 6; 
+        penetrate = false;
+        control = false;
+        inward = false;
+        control_distance = 0;
     } else if (role == "DarthSidious")
     {
         hp = 520;
@@ -116,7 +158,7 @@ void character::display_status(){
     std::cout << "Current status: \n";
     std::cout << "Hp: " << hp << std::endl;
     std::cout << "POE: " << poe << std::endl;
-    std::cout << "Buff status: " << health_buff << std::endl;
+    std::cout << "Buff status: \nHealth buff: " << health_buff << std::endl << "Shield buff: " << shield_buff << std::endl;
 }
 
 

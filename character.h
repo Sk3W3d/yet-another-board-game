@@ -70,6 +70,7 @@ public:
     double get_mass() {return mass;};
 
     bool life;
+    //from damage to control_distance : only for attack, i.e., 1st ability
     int damage;
     int distance;
     bool penetrate;
