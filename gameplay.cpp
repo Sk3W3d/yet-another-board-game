@@ -455,11 +455,11 @@ int main(){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
                                 DarthSidious_1(map.map_content, players, poles);
-                                refresh_map_display(map, players);
                             }
                         } else if (skill == "2")
                         {
                             DarthSidious_2(poles, map.map_content, players, which);
+                            refresh_map_display(map, players);
                         } else {
                             cout << "You aborted using skill. Please re-enter command. \n";
                         }
