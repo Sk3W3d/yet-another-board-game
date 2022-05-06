@@ -117,6 +117,7 @@ int main(){
             {
                 if (cmd_input == "help"){
                     cout << "The main commands include: move, skill, map, status, and save. You may enter these commands and the detailed instruction will be shown. \n";
+                    cout << "Input exit as command to exit the game. \n";
                 }
                 else if (cmd_input == "move"){
                     // RELATIVE COORDINATES INPUT
@@ -283,6 +284,10 @@ int main(){
                     }
 
                     fout.close();
+                    cout << "Game saved successfully. \n";
+                } else if (cmd_input == "exit")
+                {
+                    return 0;
                 }
                 
                 

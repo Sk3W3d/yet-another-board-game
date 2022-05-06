@@ -5,7 +5,9 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
+#include <vector>
 #include "character.h"
+#include "gamemap.h"
 
 #define WALL "\u2588\u2588"
 
@@ -16,6 +18,8 @@ character::character(std::string role){
     this->role = role;
     poe = 0;
     health_buff = 0;
+    shield_buff = 0;
+    life = true;
     if (role == "LukeSkywalker"){ 
         hp = 480;
         max_poe = 40;
@@ -231,3 +235,43 @@ bool penetrate_sd(character controller, Point start, Point direction, int distan
     }
     return penetrate_se(start, end, map_content, intercept);
 }
+
+/*
+void aoe(character attacker, vector<character> living, int poe_comsume, vector<vector<string>> map_content, int &intercept) {
+    int count = 0;
+    if (attacker.get_poe() >= poe_comsume) {
+        for (int i = 0; i < living.size(); i++) {
+            if (living[i].life && ((attacker.penetrate || penetrate_se(attacker.get_coordinates())) 
+                && distance_pp(attacker.get_coordinates(), living[i].get_coordinates()) <= attacker.distance && attacker.get_role() != living[i].get_role())) {
+                living[i].update_hp(-attacker.damage);
+                //damage(attacker.damage, i, living);
+                cout << living[i].get_role() << " HP- " << attacker.damage << " and is now " << living[i].get_hp() << endl;
+                count += 1;
+                if (attacker.control) {
+                    Point direction = attacker.inward ? {attacker.get_coordinates().x - living[i].get_coordinates().x, attacker.get_coordinates().y - living[i].get_coordinates().y}: 
+                        {-attacker.get_coordinates().x + living[i].get_coordinates().x, -attacker.get_coordinates().y + living[i].get_coordinates().y};
+                    bool stopped = !penetrate_sd(living[i].get_coordinates(), direction, attacker.control_distance, map_content, intercept);
+                    living[i].set_pos(intercept.x, intercept.y);
+                    cout << living[i].get_role() << " has been moved to (" << living[i].get_coordinates().x << ", " << living[i].get_coordinates().y << ") \n";
+                    if (attacker.get_role() == "DarthVader" && stopped) {
+                        living[i].update_hp(-120);
+                        cout << living[i].get_role << " hit wall. additional damage is dealt. his HP is now:" << living[i].get_hp() << endl;
+                    }
+                }
+            }
+        }
+        if (count == 0) {
+            cout << "seems like no one was damaged ! \n";
+        }
+        else if (attacker.get_role() == "Obi-wanKenobi") {
+            living[search("Obi-wanKenobi", living)].update_hp(40 * (count - 1));
+            cout << count << " enemies was hit. Obiwan recovers HP of " << 40 * (count - 1);
+        }
+    }
+    else {
+        cout << "your POE (points of energy) is not enough! \n";
+    }
+
+}
+
+**/
