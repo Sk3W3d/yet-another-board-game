@@ -139,7 +139,7 @@ character::character(std::string role){
 
 int character::poe_gen(){
     srand(time(0));
-    int roll = rand()%6 + 1;
+    int roll = rand()%10 + 1;
     std::cout << "You rolled " << roll << "! \n";
     poe = std::min(max_poe, poe+roll);
     std::cout << "You now have POE of " << poe << ". \n";
@@ -402,20 +402,20 @@ void HanSolo_2(vector<character> &living) {
             }
         }
         cout << endl << "enter your choice: ";
-        char choice;
+        char choice[50];
         cin >> choice;
-        while (!isdigit(choice) || (isdigit(choice) && (choice <= 0 || choice >= living.size())) || !living[atoi(&choice)].life || living[atoi(&choice)].get_role() == "HanSolo") {
+        while (!strlen(choice)==1 || !isdigit(choice[0]) || (isdigit(choice[0]) && (choice[0] <= '0' || choice[0] >= '0'+living.size())) || !living[atoi(choice)].life || living[atoi(choice)].get_role() == "HanSolo") {
             cout << "please enter a valid choice, or input 'g' to give up";
             cin >> choice;
-            if (choice == 'g') {
+            if (!strlen(choice)==1 || choice[0] == 'g') {
                 cout << "attempt aborted! \n";
                 return;
             }
         }
         if (living[search("HanSolo", living)].get_poe() >= 15) {
             Point copy = living[search("HanSolo", living)].get_coordinates();
-            living[search("HanSolo", living)].set_pos(living[choice].get_coordinates().x, living[choice].get_coordinates().y);
-            living[choice].set_pos(copy.x, copy.y);
+            living[search("HanSolo", living)].set_pos(living[atoi(choice)].get_coordinates().x, living[atoi(choice)].get_coordinates().y);
+            living[atoi(choice)].set_pos(copy.x, copy.y);
             living[search("HanSolo", living)].consume_poe(15);
             cout << "success!" << endl << "now your POE is " << living[search("HanSolo", living)].get_poe();
         }
@@ -465,7 +465,7 @@ void ObiwanKenobi_2(vector<vector<string>> &map_content, vector<character> &livi
             map_content[i][j] = "";
             living[search("Obi-wanKenobi", living)].set_health_buff(1);
             living[search("Obi-wanKenobi", living)].consume_poe(20);
-            cout << "buff get. Now your POE is " << living[search("Obi-wanKenobi", living)].get_poe();
+            cout << "buff get. Now your POE is " << living[search("Obi-wanKenobi", living)].get_poe() << endl;
         }
     }
     else {
@@ -479,41 +479,41 @@ void R2D2_1(vector<vector<string>> &map_content, vector<character> &living ) {
         for (int i = 0; i < living.size(); i++) {
             if (min_distance(living[i].life && living[i].get_coordinates().x, living[i].get_coordinates().y, map_content) <= 3 && living[i].get_role() != "R2D2") {
                 living[i].update_hp(-120);
-                cout << living[i].get_role() << " is attacked. his HP now: " << living[i].get_hp();
+                cout << living[i].get_role() << " is attacked. His HP now: " << living[i].get_hp() << endl;
                 count += 1;
             }
         }
     }
     else {
-        cout << "your POE (points of energy) is not enough! " << endl;
+        cout << "Your POE (points of energy) is not enough! " << endl;
         return;
     }
     if (count) {
         living[search("R2D2", living)].consume_poe(18);
-        cout << "Your current POE (points of energy): " << living[search("R2D2", living)].get_poe();
+        cout << "Your current POE (points of energy): " << living[search("R2D2", living)].get_poe() << endl;
     }
 }
 
 void R2D2_2(vector<vector<string>> &map_content, vector<character> &living) {
     if (living[search("R2D2", living)].get_coordinates().y == map_content.size()) {
-        cout << "you can not place wall out of the map!" << endl;
+        cout << "You can not place wall out of the map!" << endl;
         return;
     }
     else {
         if (living[search("R2D2", living)].get_poe() < 3) {
-            cout << "your POE (points of energy) is not enough!" << endl;
+            cout << "Your POE (points of energy) is not enough!" << endl;
         }
         else {
             int i = 19 - living[search("R2D2", living)].get_coordinates().y;
             int j = living[search("R2D2", living)].get_coordinates().x - 1;
             //map_content[i][j]: cell to contruct the wall
             if (map_content[i][j] != "") {
-                cout << "you can only place wall at empty cell ! \n";
+                cout << "You can only place wall at empty cell ! \n";
             }
             else {
                 map_content[i][j] = "\u2588\u2588";
                 living[search("R2D2", living)].consume_poe(3);
-                cout << "success! now your POE (points of energy) is: " << living[search("R2D2", living)].get_poe() << endl;
+                cout << "Success! now your POE (points of energy) is: " << living[search("R2D2", living)].get_poe() << endl;
             }
         }
     }

@@ -129,6 +129,7 @@ int main(){
         cout << endl;
         for (int i = 0; i < player_num; i++){
             if (players[i].get_hp() <= 0) continue;
+            cout << "---------------------------------------------------------------\n";
             cout << "Now it's " << players[i].get_role() << "'s turn. ";
 
             players[i].beginning_of_turn();
@@ -140,6 +141,7 @@ int main(){
             int counter1=0, counter2=0;
             while (cmd_input != "end")
             {
+                cout << "Input your next command: (move, skill, map, status, end, save)\n";
                 if (cmd_input == "help"){
                     cout << "The main commands include: move, skill, map, status, and save. You may enter these commands and the detailed instruction will be shown. \n";
                     cout << "Input end to end your turn. Input exit as command to exit the game. \n";
@@ -343,7 +345,7 @@ int main(){
                             }
                         } else if (skill == "2")
                         {
-                            if (counter2++ >= 1){
+                            if (counter2++ >= 3){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
                                 R2D2_2(map.map_content, players);
