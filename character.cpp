@@ -360,7 +360,7 @@ void HanSolo_1(vector<character> &living, vector<vector<string>> &map_content, P
         cout << "your attack cannot penetrate walls! \n";
         cout << "please input your choice again or input 'g' to give up attacking :";
         cin >> choice;
-        while (!strlen(choice)==1 || choice[0] != 'g' && (!isdigit(choice[0]) || (isdigit(choice[0]) && (choice[0] >= '0'+living.size())) || !living[atoi(choice)].life || living[atoi(choice)].get_role() == "HanSolo")) {
+        while (!strlen(choice)==1 || choice[0] != 'g' && (!isdigit(choice[0]) || (isdigit(choice[0]) && (choice[0] < '0' || choice[0] >= '0'+living.size())) || !living[atoi(choice)].life || living[atoi(choice)].get_role() == "HanSolo")) {
             cout << "please enter a valid command!";
             cin >> choice;
         }
@@ -404,7 +404,7 @@ void HanSolo_2(vector<character> &living) {
         cout << endl << "enter your choice: ";
         char choice[50];
         cin >> choice;
-        while (!strlen(choice)==1 || !isdigit(choice[0]) || (isdigit(choice[0]) && (choice[0] <= '0' || choice[0] >= '0'+living.size())) || !living[atoi(choice)].life || living[atoi(choice)].get_role() == "HanSolo") {
+        while (!strlen(choice)==1 || !isdigit(choice[0]) || (isdigit(choice[0]) && (choice[0] < '0' || choice[0] >= '0'+living.size())) || !living[atoi(choice)].life || living[atoi(choice)].get_role() == "HanSolo") {
             cout << "please enter a valid choice, or input 'g' to give up";
             cin >> choice;
             if (!strlen(choice)==1 || choice[0] == 'g') {
@@ -659,11 +659,12 @@ void TuskenRaider_1(vector<vector<string>> &map_content, vector<character> &livi
         cout << endl << "enter your choice: ";
         char choice[50];
         cin >> choice;
-        while (!strlen(choice) == 1 || !isdigit(choice[0]) || (isdigit(choice[0]) && (choice[0] <= '0' || choice[0] >= '0'+living.size())) || !living[atoi(choice)].life || living[atoi(choice)].get_role() == "JangoFett") {
+        while (!strlen(choice) == 1 || !isdigit(choice[0]) || (isdigit(choice[0]) && (choice[0] < '0' || choice[0] >= '0'+living.size())) || !living[atoi(choice)].life || living[atoi(choice)].get_role() == "JangoFett") {
             cout << endl << "please enter a valid choice!";
             cin >> choice;
         }
         int index = atoi(choice);
+        srand(time(0));
         int miss = rand() % 2;
         if (miss) {
             cout << "Oops! you missed! \n";

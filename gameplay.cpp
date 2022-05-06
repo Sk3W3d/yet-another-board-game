@@ -130,7 +130,7 @@ int main(){
         for (int i = 0; i < player_num; i++){
             if (players[i].get_hp() <= 0) continue;
             cout << "---------------------------------------------------------------\n";
-            cout << "Now it's " << players[i].get_role() << "'s turn. ";
+            cout << "Now it's " << players[i].get_role() << "(" << players[i].get_symbol() << ")'s turn. ";
 
             players[i].beginning_of_turn();
             
