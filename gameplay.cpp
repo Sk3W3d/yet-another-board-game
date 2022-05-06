@@ -45,7 +45,7 @@ int main(){
     map.init_map();
 
 //  for DarthSidious
-    Point poles[2];
+    Point poles[2] = {{0, 0}, {0, 0}};
     int which = 0;
 
     if (gamestart == "read"){
@@ -109,7 +109,7 @@ int main(){
         }
         // gamemap map;
         // map.init_map();
-        map.output_map();
+        // map.output_map();
 
         round = 0;
     }
@@ -129,7 +129,9 @@ int main(){
         cout << endl;
         for (int i = 0; i < player_num; i++){
             if (players[i].get_hp() <= 0) continue;
-            cout << "---------------------------------------------------------------\n";
+            cout << "------------------------------------------------------------------------------------\n";
+            cout << "------------------------------------------------------------------------------------\n";
+            refresh_map_display(map, players);
             cout << "Now it's " << players[i].get_role() << "(" << players[i].get_symbol() << ")'s turn. ";
 
             players[i].beginning_of_turn();
@@ -449,7 +451,12 @@ int main(){
                         string skill;
                         cin >> skill;
                         if (skill == "1"){
-                            DarthSidious_1(map.map_content, players, poles);
+                            if (counter1++ >= 1){
+                                cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
+                            } else {
+                                DarthSidious_1(map.map_content, players, poles);
+                                refresh_map_display(map, players);
+                            }
                         } else if (skill == "2")
                         {
                             DarthSidious_2(poles, map.map_content, players, which);

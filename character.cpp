@@ -689,8 +689,8 @@ void TuskenRaider_2(vector<character> &living) {
                 living[search("TuskenRaider", living)].update_hp(70);
                 cout << living[i].get_role() << " is dealt 70 damage and it's absorbed by you. " << living[i].get_role() << "'s HP now:" << living[i].get_hp() << endl;
             }
-            cout << "Your HP now: " << living[search("TuskenRaider", living)].get_hp() << endl;
         }
+        cout << "Your HP now: " << living[search("TuskenRaider", living)].get_hp() << endl;
     }
 }
 
@@ -731,6 +731,7 @@ void DarthMaul_1(vector<vector<string>> &map_content, vector<character> &living,
             }
             else {
                 living[index].set_pos(current_x, current_y);
+                cout << "Movement successful. You are now at (" << living[index].get_coordinates().x << ", "<< living[index].get_coordinates().y << ")\n";
             }
         }
         else {
@@ -816,6 +817,7 @@ void DarthSidious_2(Point poles[], vector<vector<string>> &map_content, vector<c
         int index = which % 2;
         if (((index == 0 && (!(to_place.x == poles[1].x && to_place.y == poles[1].y) )) || (index == 1 && (!(to_place.x == poles[0].x && to_place.y == poles[0].y) ))) && map_content[20-to_place.y][to_place.x-1] == "") {
             poles[index] = to_place;
+            map_content[20-to_place.y][to_place.x-1] = "\uA075 ";
             cout << "electric pole placed successfully! \n";
             which++;
         }
