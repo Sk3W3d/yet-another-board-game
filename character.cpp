@@ -1,5 +1,6 @@
 // character.cpp
 #include <string>
+#include <cstring>
 #include <random>
 #include <ctime>
 #include <iostream>
@@ -236,26 +237,34 @@ bool penetrate_sd(character controller, Point start, Point direction, int distan
     return penetrate_se(start, end, map_content, intercept);
 }
 
-/*
-void aoe(character attacker, vector<character> living, int poe_comsume, vector<vector<string>> map_content, int &intercept) {
+int search(string name, vector<character> living) {
+    for (int i = 0; i < living.size(); i++) {
+        if (living[i].get_role() == name) {
+            return i;
+        }
+    }
+}
+
+void aoe(character attacker, vector<character> living, int poe_comsume, vector<vector<string>> map_content, Point &intercept) {
     int count = 0;
     if (attacker.get_poe() >= poe_comsume) {
         for (int i = 0; i < living.size(); i++) {
-            if (living[i].life && ((attacker.penetrate || penetrate_se(attacker.get_coordinates())) 
+            if (living[i].life && ((attacker.penetrate || penetrate_se(attacker.get_coordinates(), living[i].get_coordinates(), map_content, intercept))
                 && distance_pp(attacker.get_coordinates(), living[i].get_coordinates()) <= attacker.distance && attacker.get_role() != living[i].get_role())) {
                 living[i].update_hp(-attacker.damage);
                 //damage(attacker.damage, i, living);
                 cout << living[i].get_role() << " HP- " << attacker.damage << " and is now " << living[i].get_hp() << endl;
                 count += 1;
                 if (attacker.control) {
-                    Point direction = attacker.inward ? {attacker.get_coordinates().x - living[i].get_coordinates().x, attacker.get_coordinates().y - living[i].get_coordinates().y}: 
-                        {-attacker.get_coordinates().x + living[i].get_coordinates().x, -attacker.get_coordinates().y + living[i].get_coordinates().y};
-                    bool stopped = !penetrate_sd(living[i].get_coordinates(), direction, attacker.control_distance, map_content, intercept);
+                    Point situation_1 = {attacker.get_coordinates().x - living[i].get_coordinates().x, attacker.get_coordinates().y - living[i].get_coordinates().y};
+                    Point situation_2 = {-attacker.get_coordinates().x + living[i].get_coordinates().x, -attacker.get_coordinates().y + living[i].get_coordinates().y};
+                    Point direction = attacker.inward ? situation_1 : situation_2;
+                    bool stopped = !penetrate_sd(attacker, living[i].get_coordinates(), direction, attacker.control_distance, map_content, intercept);
                     living[i].set_pos(intercept.x, intercept.y);
                     cout << living[i].get_role() << " has been moved to (" << living[i].get_coordinates().x << ", " << living[i].get_coordinates().y << ") \n";
                     if (attacker.get_role() == "DarthVader" && stopped) {
                         living[i].update_hp(-120);
-                        cout << living[i].get_role << " hit wall. additional damage is dealt. his HP is now:" << living[i].get_hp() << endl;
+                        cout << living[i].get_role() << " hit wall. additional damage is dealt. his HP is now:" << living[i].get_hp() << endl;
                     }
                 }
             }
@@ -274,4 +283,488 @@ void aoe(character attacker, vector<character> living, int poe_comsume, vector<v
 
 }
 
-**/
+void LukeSkywalker_1(vector<character> living, vector<vector<string>> map_content, Point &intercept) {
+    int index = search("LukeSkywalker", living);
+    aoe(living[index], living, 12, map_content, intercept);
+    living[index].consume_poe(12);
+    cout << "your POE (points of energy) now:" << living[index].get_poe() << endl;
+}
+
+void HanSolo_1(vector<character>living, vector<vector<string>> map_content, Point &intercept) {
+    cout << "wanna hit an enemy or give up this attack? \n";
+    cout << "input e/g  \n";
+    char command;
+    cin >> command;
+    if (command == 'e') {
+        cout << "possible choices: ";
+        for (int i = 0; i < living.size(); i++) {
+            if ((living[i].get_role() != "HanSolo") && living[i].life) {
+                cout << i << ":" << living[i].get_role() << ";  ";
+            }
+        }
+        cout << endl << "enter your choice: ";
+        char choice;
+        cin >> choice;
+        while (!isdigit(choice) || (isdigit(choice) && (choice <= 0 || choice >= living.size())) || !living[atoi(&choice)].life || living[atoi(&choice)].get_role() == "HanSolo") {
+            cout << endl << "please enter a valid choice!";
+            cin >> choice;
+        }
+    LABEL1: if (!penetrate_se(living[search("HanSolo", living)].get_coordinates(), living[choice].get_coordinates(), map_content, intercept)) {
+        cout << "your attack cannot penetrate walls! \n";
+        cout << "please input your choice again or input 'g' to give up attacking :";
+        cin >> choice;
+        while (choice != 'g' && (!isdigit(choice) || (isdigit(choice) && (choice <= 0 || choice >= living.size())) || !living[atoi(&choice)].life || living[atoi(&choice)].get_role() == "HanSolo")) {
+            cout << "please enter a valid command!";
+            cin >> choice;
+        }
+        if (choice != 'g') {
+            goto LABEL1;
+        }
+        else {
+            goto LABEL2;
+        }
+    }
+    else {
+        if (living[search("HanSolo", living)].get_poe() < 12) {
+            cout << "your POE (points of energy) is not enough! \n";
+            goto LABEL2;
+        }
+        else {
+            living[choice].update_hp(-living[search("HanSolo", living)].damage);
+            living[search("HanSolo", living)].consume_poe(12);
+            cout << living[choice].get_role() << " HP-" << living[search("HanSolo", living)].damage << " and is now" << living[choice].get_hp() << endl;
+            cout << "your POE:" << living[search("HanSolo", living)].get_poe() << endl;
+        }
+    }
+    }
+    else {
+    LABEL2: cout << "attack aborted \n";
+    }
+}
+
+void HanSolo_2(vector<character> living) {
+    cout << "wanna interchange position with someone or give up this sttempt? \n";
+    cout << "input 'i' to interchange or any character else to give up attempt \n";
+    char command;
+    cin >> command;
+    if (command == 'i') {
+        cout << "possible choices: ";
+        for (int i = 0; i < living.size(); i++) {
+            if ((living[i].get_role() != "HanSolo") && living[i].life) {
+                cout << i << ":" << living[i].get_role();
+            }
+        }
+        cout << endl << "enter your choice: ";
+        char choice;
+        cin >> choice;
+        while (!isdigit(choice) || (isdigit(choice) && (choice <= 0 || choice >= living.size())) || !living[atoi(&choice)].life || living[atoi(&choice)].get_role() == "HanSolo") {
+            cout << "please enter a valid choice, or input 'g' to give up";
+            cin >> choice;
+            if (choice == 'g') {
+                cout << "attempt aborted! \n";
+                return;
+            }
+        }
+        if (living[search("HanSolo", living)].get_poe() >= 15) {
+            Point copy = living[search("HanSolo", living)].get_coordinates();
+            living[search("HanSolo", living)].set_pos(living[choice].get_coordinates().x, living[choice].get_coordinates().y);
+            living[choice].set_pos(copy.x, copy.y);
+            living[search("HanSolo", living)].consume_poe(15);
+            cout << "success!" << endl << "now your POE is " << living[search("HanSolo", living)].get_poe();
+        }
+        else {
+            cout << "your POE (points of energy) is not enough!" << endl;
+            cout << "attempt aborted!" << endl;
+        }
+    }
+    else {
+        cout << "attempt aborted! \n";
+    }
+}
+
+void ObiwanKenobi_1(vector<character> living, vector<vector<string>> map_content, Point &intercept) {
+    aoe(living[search("Obi-wanKenobi", living)], living, 10, map_content, intercept);
+    living[search("Obi-wanKenobi", living)].consume_poe(10);
+    cout << "your POE (points of energy) now: " << living[search("Obiwan-Kenobi", living)].get_poe();
+}
+
+void ObiwanKenobi_2(vector<vector<string>> map_content, vector<character> living, int poe_consumption) {
+    Point location = { 0, 0 };
+    if (living[search("Obiwan-Kenobi", living)].get_poe() >= poe_consumption) {
+        int distance = 1000;
+        for (int i = 0; i < 19; i++) {
+            for (int j = 0; j < 39; j++) {
+                if (map_content[i][j] == "\u002B") {
+                    location.x = j + 1;
+                    location.y = 20 - i;
+                    distance = min(double(distance), distance_pp(location, living[search("Obi-wanKennobi", living)].get_coordinates()));
+                }
+            }
+        }
+        if (distance == 1000) {
+            cout << " there is no buff in the map! \n";
+        }
+        else {
+            int i = 20 - location.y;
+            int j = location.x - 1;
+            map_content[i][j] = "";
+            living[search("Obiwan-Kenobi", living)].set_health_buff(1);
+            living[search("Obiwan-Kenobi", living)].consume_poe(10);
+            cout << "buff get. Now your POE is " << living[search("Obiwan-Kenobi", living)].get_poe();
+        }
+    }
+    else {
+        cout << "your POE (points of energy) is not enough!  \n";
+    }
+}
+
+void R2D2_1(vector<vector<string>> map_content, vector<character> living ) {
+    int count = 0;
+    if (living[search("R2D2", living)].get_poe() >= 18) {
+        for (int i = 0; i < living.size(); i++) {
+            if (min_distance(living[i].life && living[i].get_coordinates().x, living[i].get_coordinates().y, map_content) <= 3 && living[i].get_role() != "R2D2") {
+                living[i].update_hp(-120);
+                cout << living[i].get_role() << " is attacked. his HP now: " << living[i].get_hp();
+                count += 1;
+            }
+        }
+    }
+    else {
+        cout << "your POE (points of energy) is not enough! " << endl;
+        return;
+    }
+    if (count) {
+        living[search("R2D2", living)].consume_poe(18);
+        cout << "Your current POE (points of energy): " << living[search("R2D2", living)].get_poe();
+    }
+}
+
+void R2D2_2(vector<vector<string>> map_content, vector<character> living) {
+    if (living[search("R2D2", living)].get_coordinates().y == map_content.size()) {
+        cout << "you can not place wall out of the map!" << endl;
+        return;
+    }
+    else {
+        if (living[search("R2D2", living)].get_poe() < 3) {
+            cout << "your POE (points of energy) is not enough!" << endl;
+        }
+        else {
+            int i = 19 - living[search("R2D2", living)].get_coordinates().y;
+            int j = living[search("R2D2", living)].get_coordinates().x - 1;
+            //map_content[i][j]: cell to contruct the wall
+            if (map_content[i][j] != "") {
+                cout << "you can only place wall at empty cell ! \n";
+            }
+            else {
+                map_content[i][j] = "\u2588\u2588";
+                living[search("R2D2", living)].consume_poe(3);
+                cout << "success! now your POE (points of energy) is: " << living[search("R2D2", living)].get_poe() << endl;
+            }
+        }
+    }
+}
+
+void Chewbacca_1(vector<vector<string>> map_content, vector<character> living, Point &intercept) {
+    aoe(living[search("Chewbacca", living)], living, -8, map_content, intercept);
+    living[search("Chewbacca", living)].consume_poe(-8);
+    std::cout << "your POE (points of energy) is now: " << living[search("Chewbacca", living)].get_poe() << endl;
+}
+
+void Chewbacca_2(vector<vector<string>> map_content, vector<character> living, Point &intercept) {
+    if (living[search("Chewbacca", living)].get_poe() < 25) {
+        cout << "your POE is not enough for this! " << endl;
+        return;
+    }
+    else {
+        if (living[search("Chewbacca", living)].get_hp() < 180) {
+            cout << "your HP has to be more than 180 to do this!";
+        }
+        for (int i = 0; i < living.size(); i++) {
+            if (living[i].life && distance_pp(living[search("Chewbacca", living)].get_coordinates(), living[i].get_coordinates()) <= 8 && living[i].get_role() != "Chewbacca") {
+                Point direction = { living[search("Chewbacca", living)].get_coordinates().x - living[i].get_coordinates().x, living[search("Chewbacca", living)].get_coordinates().y - living[i].get_coordinates().y };
+                    penetrate_sd(living[search("Chewbacca", living)], living[search("Chewbacca", living)].get_coordinates(), direction, living[search("Chewbacca", living)].control_distance, map_content, intercept);
+                    living[i].set_pos(intercept.x, intercept.y);
+                    living[i].set_poe(0);
+                    cout << living[i].get_role() << " moved to ( " << living[i].get_coordinates().x << ", " << living[i].get_coordinates().y << "), and POE reset. \n";
+            }
+        }
+        living[search("Chewbacca", living)].consume_poe(25);
+            cout << " your current POE (points of energy) is :" << living[search("Chewbacca", living)].get_poe();
+    }
+}
+
+void DarthVader_1(vector<vector<string>> map_content, vector<character> living, Point &intercept) {
+    if (living[search("DarthVader", living)].get_poe() < 25) {
+        cout << "YOUR POE(points of enregy is not enough! " << endl;
+        return;
+    }
+    else {
+        aoe(living[search("DarthVader", living)], living, 25, map_content, intercept);
+        living[search("DarthVader", living)].consume_poe(25);
+        cout << "your current poe: " << living[search("DarthVader", living)].get_poe() << endl;
+    }
+}
+
+void DarthVader_2(vector<vector<string>> map_content, vector<character> living, Point &intercept) {
+    if (living[search("DarthVader", living)].get_poe() < 10) {
+        cout << "your POE is not enough for this! " << endl;
+        return;
+    }
+    else {
+        for (int i = 0; i < living.size(); i++) {
+            if (living[i].life && distance_pp(living[search("DarthVader", living)].get_coordinates(), living[i].get_coordinates()) <= 10 && living[i].get_role() != "DarthVaader") {
+                Point direction = { living[search("DarthVader", living)].get_coordinates().x - living[i].get_coordinates().x, living[search("DarthVader", living)].get_coordinates().y - living[i].get_coordinates().y };
+                    penetrate_sd(living[search("DarthVader", living)], living[search("DarthVader", living)].get_coordinates(), direction, living[search("DarthVader", living)].control_distance, map_content, intercept);
+                    living[i].set_pos(intercept.x, intercept.y);
+                    cout << living[i].get_role() << " moved to ( " << living[i].get_coordinates().x << ", " << living[i].get_coordinates().y << ") \n";
+            }
+        }
+        living[search("DarthVader", living)].consume_poe(10);
+            cout << " your current POE (points of energy) is :" << living[search("DarthVader", living)].get_poe() << endl;
+    }
+}
+
+void JangoFett_1(vector<vector<string>> map_content, vector<character> living, Point &intercept) {
+    if (living[search("JangoFett", living)].get_poe() < 13) {
+        cout << "your POE (points of energy) is not enough !" << endl;
+        return;
+    }
+    else {
+        Point direction;
+        string raw;
+        cout << "input a direction (two integer split by space). \n";
+        cout << " example: input '1 1' to indecate the direction towards 45 degrees to the upper right. \n";
+        char x, y;
+        cin >> x, y;
+        while (!isdigit(x) || !isdigit(y) || (x == 0 && y == 0)) {
+            cout << "please input a valid value!" << endl;
+            cin >> x, y;
+        }
+        direction.x = x;
+        direction.y = y;
+        cin >> raw;
+        bool available = true;
+        char a[100000];
+        strcpy(a, raw.c_str());
+        for (int i = 0; i < raw.size(); i++) {
+            if (!isdigit(a[i])) {
+                available = false;
+            }
+        }
+        while (!available) {
+            cout << "please input a valid value! " << endl;
+            available = true;
+            cin >> raw;
+            strcpy(a, raw.c_str());
+            for (int i = 0; i < raw.size(); i++) {
+                if (!isdigit(a[i])) {
+                    available = false;
+                }
+            }
+        }
+        int distance = min(atoi(raw.c_str()), 10);
+
+        penetrate_sd(living[search("JangoFett", living)], living[search("JangoFett", living)].get_coordinates(), direction, distance, map_content, intercept);
+        Point explosion = intercept;
+        cout << "missile exploded at ( " << explosion.x << ", " << explosion.y << "). \n";
+        for (int i = 0; i < map_content.size(); i++) {
+            for (int j = 0; j < 40; j++) {
+                if (map_content[i][j] == "\u2588\u2588") {
+                    Point wall = { j + 1, 20 - 1 };
+                    if (distance_pp(explosion, wall) <= 4) {
+                        map_content[i][j] = "";
+                        cout << "wall at ( " << wall.x << ", " << wall.y << ") is cleared. \n";
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < living.size(); i++) {
+            if (living[i].life && living[i].get_role() != "JangoFett" && distance_pp(explosion, living[i].get_coordinates()) <= 4) {
+                living[i].update_hp(-95);
+                cout << living[i].get_role() << " HP -= 95 and is now " << living[i].get_hp() << endl;
+            }
+        }
+        living[search("JangoFett", living)].consume_poe(13);
+        cout << "your current POE(point sof energy): " << living[search("JangoFett", living)].get_poe();
+    }
+}
+
+void TuskenRaider_1(vector<vector<string>> map_content, vector<character> living) {
+    if (living[search("TuskenRaider", living)].get_poe() < 5) {
+        cout << "your POE (points of energy) is not enough !" << endl;
+        return;
+    }
+    else {
+        cout << "possible choices: ";
+        for (int i = 0; i < living.size(); i++) {
+            if ((living[i].get_role() != "TuskenRaider") && living[i].life) {
+                cout << i << ":" << living[i].get_role() << ";  ";
+            }
+        }
+        cout << endl << "enter your choice: ";
+        char choice;
+        cin >> choice;
+        while (!isdigit(choice) || (isdigit(choice) && (choice <= 0 || choice >= living.size())) || !living[atoi(&choice)].life || living[atoi(&choice)].get_role() == "JangoFett") {
+            cout << endl << "please enter a valid choice!";
+            cin >> choice;
+        }
+        int index = atoi(&choice);
+        int miss = rand() % 2;
+        if (miss) {
+            cout << "Oops! you missed! \n";
+            return;
+        }
+        else {
+            living[index].update_hp(-65);
+            cout << living[index].get_role() << " is hit, his HP -= 65 and is now " << living[index].get_hp() << endl;
+        }
+    }
+}
+
+void TuskenRaider_2(vector<character> living) {
+    if (living[search("TuskenRaider", living)].get_poe() < 5) {
+        cout << "your POE (points of energy) is not enough !" << endl;
+        return;
+    }
+    else {
+        for (int i = 0; i < living.size(); i++) {
+            if ((living[i].get_role() != "TuskenRaider") && living[i].life && distance_pp(living[search("TuskenRaider", living)].get_coordinates(), living[i].get_coordinates()) <= 4) {
+                living[i].update_hp(-70);
+                living[search("TuskenRaider", living)].update_hp(70);
+                cout << living[i].get_role() << " is dealt 70 damage and it's absorbed by you. " << living[i].get_role() << "'s HP now:" << living[i].get_hp() << endl;
+            }
+            cout << "Your HP now: " << living[search("TuskenRaider", living)].get_hp() << endl;
+        }
+    }
+}
+
+void DarthMaul_1(vector<vector<string>> map_content, vector<character> living, Point &intercept) {
+    int index = search("DarthMaul", living);
+    if (living[index].get_poe() < 11) {
+        cout << "your POE (points of energy) is not enough!" << endl;
+        return;
+    }
+    else {
+        aoe(living[index], living, 11, map_content, intercept);
+        living[index].consume_poe(11);
+        cout << "your POE (points of energy) now:" << living[index].get_poe() << endl;
+        cout << "wanna use additional move?   input y/n: ";
+        char cmd;
+        cin >> cmd;
+        while (cmd != 'y' && cmd != 'n') {
+            cout << endl << "please input y/n! input again: ";
+            cin >> cmd;
+        }
+        if (cmd == 'y') {
+            cout << "input a direction (two integer split by space). \n";
+            cout << " example: input '1 -1' to indecate the direction towards 45 degrees to the lower right. \n";
+            char x, y;
+            cin >> x, y;
+            while (!isdigit(x) || !isdigit(y) || (x == 0 && y == 0)) {
+                cout << "please input a valid value!" << endl;
+                cin >> x, y;
+            }
+            Point direction;
+            direction.x = round((5 / (pow(x, 2) + pow(y, 2))) * x);
+            direction.y = round((5 / (pow(x, 2) + pow(y, 2))) * y);
+            int current_x = living[index].get_coordinates().x + direction.x;
+            int current_y = living[index].get_coordinates().y + direction.y;
+            if (current_x <= 0 || current_x > 40 || current_y <= 0 || current_y >= 20) {
+                cout << "you cannot be out of map! movement aborted \n";
+                return;
+            }
+            else {
+                living[index].set_pos(current_x, current_y);
+            }
+        }
+        else {
+            cout << "movement aborted \n";
+            return;
+        }
+    }
+}
+
+bool reach(Point p1, Point p2) {
+    //function specially for Darth Sidious's 1st ability
+    if (p1.x == 0 && p1.y == 0 && p2.x == 0 && p2.y == 0) {
+        return false;
+    }
+    else {
+        return distance_pp(p1, p2) <= 6;
+    }
+}
+
+void DarthSidious_1(vector<vector<string>> map_content, vector<character> living, Point poles[]) {
+    // so dumb
+    if (living[search("DarthSidious", living)].get_poe() < 15) {
+        cout << "your POE (points of energy) is not enough!" << endl;
+        return;
+    }
+    else {
+        int count = 0;
+        for (int i = 0; i < living.size(); i++) {
+            if (living[i].life && living[i].get_role() != "DarthSidious") {
+                Point lord = living[search("DarthSidious", living)].get_coordinates();
+                Point p1 = poles[0];
+                Point p2 = poles[1];
+                Point tar = living[i].get_coordinates();
+                if (reach(lord, tar)) {
+                    count++;
+                    living[i].update_hp(-105);
+                    cout << living[i].get_role() << " directly attacked, his HP -= 105 and is now: " << living[i].get_hp() << endl;
+                }
+                else if (reach(lord, p1) && reach(p1, tar)) {
+                    count++;
+                    living[i].update_hp(-105);
+                    cout << living[i].get_role() << "is attacked, electricity conducted by pole at ( " << p1.x << ", " << p1.y << "), his HP -= 105 and is now : " << living[i].get_hp() << endl;
+                }
+                else if (reach(lord, p2) && reach(p2, tar)) {
+                    count++;
+                    living[i].update_hp(-105);
+                    cout << living[i].get_role() << "is attacked, electricity conducted by pole at ( " << p2.x << ", " << p2.y << "), his HP -= 105 and is now : " << living[i].get_hp() << endl;
+                }
+                else if (reach(lord, p1) && reach(p1, p2) && reach(p2, tar)) {
+                    count++;
+                    living[i].update_hp(-105);
+                    cout << living[i].get_role() << "is attacked, electricity conducted by poles at ( " << p1.x << ", " << p1.y << "), and ( " << p2.x << ", " << p2.y << "), his HP -= 105 and is now : " << living[i].get_hp() << endl;
+                }
+                else if (reach(lord, p2) && reach(p2, p1) && reach(p1, tar)) {
+                    count++;
+                    living[i].update_hp(-105);
+                    cout << living[i].get_role() << "is attacked, electricity conducted by poles at ( " << p2.x << ", " << p2.y << "), and ( " << p1.x << ", " << p1.y << "), his HP -= 105 and is now : " << living[i].get_hp() << endl;
+                }
+            }
+        }
+        if (count == 0) {
+            cout << "Oops, seems like you hit nobody! \n";
+        }
+        living[search("DarthSidious", living)].consume_poe(15);
+        cout << "your current POE (points of energy) is: " << living[search("DarthSidious", living)].get_poe() << endl;
+    }
+}
+
+void DarthSidious_2(Point poles[], vector<vector<string>> map_content, vector<character> living, int &which) {
+    if (living[search("DarthSidious", living)].get_poe() < 15) {
+        cout << "your POE (points of energy) is not enough! \n";
+        return;
+    }
+    else {
+        living[search("DarthSidious", living)].update_hp(50);
+        Point to_place = living[search("DarthSidious", living)].get_coordinates();
+        to_place.y += 1;
+        if (to_place.y > 20) {
+            cout << "you cannot place it outside map! Your HP and POE is unchanged.\n";
+            return;
+        }
+        living[search("DarthSidious", living)].consume_poe(15);
+        int index = which % 2;
+        if (((index == 0 && (!(to_place.x == poles[1].x && to_place.y == poles[1].y) )) || (index == 1 && (!(to_place.x == poles[0].x && to_place.y == poles[0].y) ))) && map_content[20-to_place.y][to_place.x-1] == "") {
+            poles[index] = to_place;
+            cout << "electric pole placed successfully! \n";
+        }
+        else {
+            cout << "Failed to place the pola, because poles have to be placed at empty cells. However HP += 50 \n";
+        }
+        cout << "your current HP and POE: " << living[search("DarthSidious", living)].get_hp() << " and " << living[search("DarthSidious", living)].get_poe() << endl;
+    }
+}

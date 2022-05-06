@@ -103,6 +103,7 @@ int main(){
     bool endgame = false;
     while(!endgame){
         round++;
+        map.element_gen(round);
         refresh_map_display(map, players);
         cout << "Round " << round << endl;
         for (int i = 0; i < player_num; i++){
@@ -224,35 +225,117 @@ int main(){
 
                 } else if (cmd_input == "skill")
                 {
+                    Point intercept;
                     if (players[i].get_role() == "LukeSkywalker"){
-
+                        cout << "You have 1 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
+                        string skill;
+                        if (skill == "1"){
+                            LukeSkywalker_1(players, map.get_map_content(), intercept);
+                        } else {
+                            cout << "You aborted using skill. Please re-enter command. \n";
+                        }
                     } else if (players[i].get_role() == "HanSolo")
                     {
-                        /* code */
+                        cout << "You have 2 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
+                        string skill;
+                        if (skill == "1"){
+                            HanSolo_1(players, map.get_map_content(), intercept);
+                        } else if (skill == "2")
+                        {
+                            HanSolo_2(players);
+                        } else {
+                            cout << "You aborted using skill. Please re-enter command. \n";
+                        }
                     } else if (players[i].get_role() == "Obi-wanKenobi")
                     {
-                        /* code */
+                        cout << "You have 2 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
+                        string skill;
+                        if (skill == "1"){
+                            ObiwanKenobi_1(players, map.get_map_content(), intercept);
+                        } else if (skill == "2")
+                        {
+                            ObiwanKenobi_2(map.get_map_content(), players, 30);
+                        } else {
+                            cout << "You aborted using skill. Please re-enter command. \n";
+                        }
                     } else if (players[i].get_role() == "R2D2")
                     {
-                        /* code */
+                        cout << "You have 2 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
+                        string skill;
+                        if (skill == "1"){
+                            R2D2_1(map.get_map_content(), players);
+                        } else if (skill == "2")
+                        {
+                            R2D2_2(map.get_map_content(), players);
+                        } else {
+                            cout << "You aborted using skill. Please re-enter command. \n";
+                        }
                     } else if (players[i].get_role() == "Chewbacca")
                     {
-
+                        cout << "You have 2 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
+                        string skill;
+                        if (skill == "1"){
+                            Chewbacca_1(map.get_map_content(), players, intercept);
+                        } else if (skill == "2")
+                        {
+                            Chewbacca_2(map.get_map_content(), players, intercept);
+                        } else {
+                            cout << "You aborted using skill. Please re-enter command. \n";
+                        }
                     } else if (players[i].get_role() == "DarthVader")
                     {
-
+                        cout << "You have 2 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
+                        string skill;
+                        if (skill == "1"){
+                            DarthVader_1(map.get_map_content(), players, intercept);
+                        } else if (skill == "2")
+                        {
+                            DarthVader_2(map.get_map_content(), players, intercept);
+                        } else {
+                            cout << "You aborted using skill. Please re-enter command. \n";
+                        }
                     } else if (players[i].get_role() == "JangoFett")
                     {
-
+                        cout << "You have 1 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
+                        string skill;
+                        if (skill == "1"){
+                            JangoFett_1(map.get_map_content(), players, intercept);
+                        } else {
+                            cout << "You aborted using skill. Please re-enter command. \n";
+                        }
                     } else if (players[i].get_role() == "TuskenRaider")
                     {
-
+                        cout << "You have 2 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
+                        string skill;
+                        if (skill == "1"){
+                            TuskenRaider_1(map.get_map_content(), players);
+                        } else if (skill == "2")
+                        {
+                            TuskenRaider_2(players);
+                        } else {
+                            cout << "You aborted using skill. Please re-enter command. \n";
+                        }
                     } else if (players[i].get_role() == "DarthMaul")
                     {
-
+                        cout << "You have 1 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
+                        string skill;
+                        if (skill == "1"){
+                            DarthMaul_1(map.get_map_content(), players, intercept);
+                        } else {
+                            cout << "You aborted using skill. Please re-enter command. \n";
+                        }
                     } else if (players[i].get_role() == "DarthSidious")
                     {
-
+                        cout << "You have 2 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
+                        string skill;
+                        if (skill == "1"){
+                            // DarthSidious_1(map.get_map_content(), players, );
+                        } else if (skill == "2")
+                        {
+                            // DarthSidious_2();
+                        } else {
+                            cout << "You aborted using skill. Please re-enter command. \n";
+                        }
                     }
                     
                     
