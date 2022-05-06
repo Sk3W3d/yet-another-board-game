@@ -287,7 +287,7 @@ int search(string name, vector<character> living) {
     }
 }
 
-void aoe(character attacker, vector<character> living, int poe_comsume, vector<vector<string>> map_content, Point &intercept) {
+void aoe(character attacker, vector<character> &living, int poe_comsume, vector<vector<string>> &map_content, Point &intercept) {
     int count = 0;
     if (attacker.get_poe() >= poe_comsume) {
         for (int i = 0; i < living.size(); i++) {
@@ -325,7 +325,7 @@ void aoe(character attacker, vector<character> living, int poe_comsume, vector<v
 
 }
 
-void LukeSkywalker_1(vector<character> living, vector<vector<string>> map_content, Point &intercept) {
+void LukeSkywalker_1(vector<character> &living, vector<vector<string>> &map_content, Point &intercept) {
     int index = search("LukeSkywalker", living);
     if (living[index].get_poe() >= 12){
         aoe(living[index], living, 12, map_content, intercept);
@@ -337,7 +337,7 @@ void LukeSkywalker_1(vector<character> living, vector<vector<string>> map_conten
     }
 }
 
-void HanSolo_1(vector<character>living, vector<vector<string>> map_content, Point &intercept) {
+void HanSolo_1(vector<character> &living, vector<vector<string>> &map_content, Point &intercept) {
     cout << "wanna hit an enemy or give up this attack? \n";
     cout << "input e/g  \n";
     char command;
@@ -389,7 +389,7 @@ void HanSolo_1(vector<character>living, vector<vector<string>> map_content, Poin
     }
 }
 
-void HanSolo_2(vector<character> living) {
+void HanSolo_2(vector<character> &living) {
     cout << "wanna interchange position with someone or give up this sttempt? \n";
     cout << "input 'i' to interchange or any character else to give up attempt \n";
     char command;
@@ -429,7 +429,7 @@ void HanSolo_2(vector<character> living) {
     }
 }
 
-void ObiwanKenobi_1(vector<character> living, vector<vector<string>> map_content, Point &intercept) {
+void ObiwanKenobi_1(vector<character> &living, vector<vector<string>> &map_content, Point &intercept) {
     if (living[search("Obi-wanKenobi", living)].get_poe() >= 10){
         aoe(living[search("Obi-wanKenobi", living)], living, 10, map_content, intercept);
         living[search("Obi-wanKenobi", living)].consume_poe(10);
@@ -440,7 +440,7 @@ void ObiwanKenobi_1(vector<character> living, vector<vector<string>> map_content
     }
 }
 
-void ObiwanKenobi_2(vector<vector<string>> map_content, vector<character> living, int poe_consumption) {
+void ObiwanKenobi_2(vector<vector<string>> &map_content, vector<character> &living, int poe_consumption) {
     Point location = { 0, 0 };
     if (living[search("Obiwan-Kenobi", living)].get_poe() >= poe_consumption) {
         int distance = 1000;
@@ -470,7 +470,7 @@ void ObiwanKenobi_2(vector<vector<string>> map_content, vector<character> living
     }
 }
 
-void R2D2_1(vector<vector<string>> map_content, vector<character> living ) {
+void R2D2_1(vector<vector<string>> &map_content, vector<character> &living ) {
     int count = 0;
     if (living[search("R2D2", living)].get_poe() >= 18) {
         for (int i = 0; i < living.size(); i++) {
@@ -491,7 +491,7 @@ void R2D2_1(vector<vector<string>> map_content, vector<character> living ) {
     }
 }
 
-void R2D2_2(vector<vector<string>> map_content, vector<character> living) {
+void R2D2_2(vector<vector<string>> &map_content, vector<character> &living) {
     if (living[search("R2D2", living)].get_coordinates().y == map_content.size()) {
         cout << "you can not place wall out of the map!" << endl;
         return;
@@ -516,13 +516,13 @@ void R2D2_2(vector<vector<string>> map_content, vector<character> living) {
     }
 }
 
-void Chewbacca_1(vector<vector<string>> map_content, vector<character> living, Point &intercept) {
+void Chewbacca_1(vector<vector<string>> &map_content, vector<character> &living, Point &intercept) {
     aoe(living[search("Chewbacca", living)], living, -8, map_content, intercept);
     living[search("Chewbacca", living)].consume_poe(-8);
     std::cout << "your POE (points of energy) is now: " << living[search("Chewbacca", living)].get_poe() << endl;
 }
 
-void Chewbacca_2(vector<vector<string>> map_content, vector<character> living, Point &intercept) {
+void Chewbacca_2(vector<vector<string>> &map_content, vector<character> &living, Point &intercept) {
     if (living[search("Chewbacca", living)].get_poe() < 25) {
         cout << "your POE is not enough for this! " << endl;
         return;
@@ -545,7 +545,7 @@ void Chewbacca_2(vector<vector<string>> map_content, vector<character> living, P
     }
 }
 
-void DarthVader_1(vector<vector<string>> map_content, vector<character> living, Point &intercept) {
+void DarthVader_1(vector<vector<string>> &map_content, vector<character> &living, Point &intercept) {
     if (living[search("DarthVader", living)].get_poe() < 25) {
         cout << "YOUR POE(points of enregy is not enough! " << endl;
         return;
@@ -557,7 +557,7 @@ void DarthVader_1(vector<vector<string>> map_content, vector<character> living, 
     }
 }
 
-void DarthVader_2(vector<vector<string>> map_content, vector<character> living, Point &intercept) {
+void DarthVader_2(vector<vector<string>> &map_content, vector<character> &living, Point &intercept) {
     if (living[search("DarthVader", living)].get_poe() < 10) {
         cout << "your POE is not enough for this! " << endl;
         return;
@@ -576,7 +576,7 @@ void DarthVader_2(vector<vector<string>> map_content, vector<character> living, 
     }
 }
 
-void JangoFett_1(vector<vector<string>> map_content, vector<character> living, Point &intercept) {
+void JangoFett_1(vector<vector<string>> &map_content, vector<character> &living, Point &intercept) {
     if (living[search("JangoFett", living)].get_poe() < 13) {
         cout << "your POE (points of energy) is not enough !" << endl;
         return;
@@ -641,7 +641,7 @@ void JangoFett_1(vector<vector<string>> map_content, vector<character> living, P
     }
 }
 
-void TuskenRaider_1(vector<vector<string>> map_content, vector<character> living) {
+void TuskenRaider_1(vector<vector<string>> &map_content, vector<character> &living) {
     if (living[search("TuskenRaider", living)].get_poe() < 5) {
         cout << "your POE (points of energy) is not enough !" << endl;
         return;
@@ -673,7 +673,7 @@ void TuskenRaider_1(vector<vector<string>> map_content, vector<character> living
     }
 }
 
-void TuskenRaider_2(vector<character> living) {
+void TuskenRaider_2(vector<character> &living) {
     if (living[search("TuskenRaider", living)].get_poe() < 5) {
         cout << "your POE (points of energy) is not enough !" << endl;
         return;
@@ -690,7 +690,7 @@ void TuskenRaider_2(vector<character> living) {
     }
 }
 
-void DarthMaul_1(vector<vector<string>> map_content, vector<character> living, Point &intercept) {
+void DarthMaul_1(vector<vector<string>> &map_content, vector<character> &living, Point &intercept) {
     int index = search("DarthMaul", living);
     if (living[index].get_poe() < 11) {
         cout << "your POE (points of energy) is not enough!" << endl;
@@ -746,7 +746,7 @@ bool reach(Point p1, Point p2) {
     }
 }
 
-void DarthSidious_1(vector<vector<string>> map_content, vector<character> living, Point poles[]) {
+void DarthSidious_1(vector<vector<string>> &map_content, vector<character> &living, Point poles[]) {
     // so dumb
     if (living[search("DarthSidious", living)].get_poe() < 15) {
         cout << "your POE (points of energy) is not enough!" << endl;
@@ -795,7 +795,7 @@ void DarthSidious_1(vector<vector<string>> map_content, vector<character> living
     }
 }
 
-void DarthSidious_2(Point poles[], vector<vector<string>> map_content, vector<character> living, int &which) {
+void DarthSidious_2(Point poles[], vector<vector<string>> &map_content, vector<character> &living, int &which) {
     if (living[search("DarthSidious", living)].get_poe() < 15) {
         cout << "your POE (points of energy) is not enough! \n";
         return;
