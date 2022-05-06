@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <stdlib.h>
 #include "gamemap.h"
 #include "character.h"
 
@@ -79,7 +80,14 @@ int main(){
             << "\"DarthVader\", \"JangoFett\", \"TuskenRaider\", \"DarthMaul\", \"DarthSidious\"}\n";
         const string roles[] = {"LukeSkywalker", "HanSolo", "Obi-wanKenobi", "R2D2", "Chewbacca", 
             "DarthVader", "JangoFett", "TuskenRaider", "DarthMaul", "DarthSidious"};
-        cin >> player_num;
+        string player_num_str;
+        cin >> player_num_str;
+        player_num = atoi(player_num_str.c_str());
+        while (player_num < 2 && player_num > 10)
+        {
+            cout << "Invalid player number. Please input a number from 2 to 10. \n";
+        }
+        
         for (int i = 0; i < player_num; i++){
             cout << "What role does player no. " << (i+1) << " want to play? (input full name)";
             string role;
@@ -141,7 +149,7 @@ int main(){
                         cout << "Movement successful. Current position: " << destination.x << ", " << destination.y << endl;
                         cout << "Remaining POE: " << players[i].get_poe() << endl;
                     } else {
-                        cout << "Movement uncessful. You hit the wall. Current position: " << intercept.x << ", " << intercept.y << endl;
+                        cout << "Movement unsucessful. You hit the wall. Current position: " << intercept.x << ", " << intercept.y << endl;
                         players[i].set_poe(players[i].get_poe() - players[i].get_mass() * distance_pp(players[i].get_coordinates(), intercept));
                         players[i].set_pos(intercept.x, intercept.y);
                         cout << "Remaining POE: " << players[i].get_poe() << endl;
@@ -229,6 +237,7 @@ int main(){
                     if (players[i].get_role() == "LukeSkywalker"){
                         cout << "You have 1 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
                         string skill;
+                        cin >> skill;
                         if (skill == "1"){
                             LukeSkywalker_1(players, map.get_map_content(), intercept);
                         } else {
@@ -238,6 +247,7 @@ int main(){
                     {
                         cout << "You have 2 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
                         string skill;
+                        cin >> skill;
                         if (skill == "1"){
                             HanSolo_1(players, map.get_map_content(), intercept);
                         } else if (skill == "2")
@@ -250,6 +260,7 @@ int main(){
                     {
                         cout << "You have 2 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
                         string skill;
+                        cin >> skill;
                         if (skill == "1"){
                             ObiwanKenobi_1(players, map.get_map_content(), intercept);
                         } else if (skill == "2")
@@ -262,6 +273,7 @@ int main(){
                     {
                         cout << "You have 2 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
                         string skill;
+                        cin >> skill;
                         if (skill == "1"){
                             R2D2_1(map.get_map_content(), players);
                         } else if (skill == "2")
@@ -274,6 +286,7 @@ int main(){
                     {
                         cout << "You have 2 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
                         string skill;
+                        cin >> skill;
                         if (skill == "1"){
                             Chewbacca_1(map.get_map_content(), players, intercept);
                         } else if (skill == "2")
@@ -286,6 +299,7 @@ int main(){
                     {
                         cout << "You have 2 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
                         string skill;
+                        cin >> skill;
                         if (skill == "1"){
                             DarthVader_1(map.get_map_content(), players, intercept);
                         } else if (skill == "2")
@@ -298,6 +312,7 @@ int main(){
                     {
                         cout << "You have 1 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
                         string skill;
+                        cin >> skill;
                         if (skill == "1"){
                             JangoFett_1(map.get_map_content(), players, intercept);
                         } else {
@@ -307,6 +322,7 @@ int main(){
                     {
                         cout << "You have 2 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
                         string skill;
+                        cin >> skill;
                         if (skill == "1"){
                             TuskenRaider_1(map.get_map_content(), players);
                         } else if (skill == "2")
@@ -319,6 +335,7 @@ int main(){
                     {
                         cout << "You have 1 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
                         string skill;
+                        cin >> skill;
                         if (skill == "1"){
                             DarthMaul_1(map.get_map_content(), players, intercept);
                         } else {
@@ -328,6 +345,7 @@ int main(){
                     {
                         cout << "You have 2 skill. Please confirm which skill you would like to use. (input skill no. to execute, other inputs to abort. ): ";
                         string skill;
+                        cin >> skill;
                         if (skill == "1"){
                             // DarthSidious_1(map.get_map_content(), players, );
                         } else if (skill == "2")
