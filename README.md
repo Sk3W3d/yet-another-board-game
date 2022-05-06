@@ -130,7 +130,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Ability 1 (attack): fist of fury
         POE consumption: (-8)
         Overheat: 1
-        Deals 125 damage to every enemy within distance of 2. Regardless of walls.yi
+        Deals 125 damage to every enemy within distance of 2. Regardless of walls.
     Ability 2 (special): roar (available only when HP not less than 180)
         POE consumption: 25
         Overheat: 1
