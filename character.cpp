@@ -589,14 +589,14 @@ void JangoFett_1(vector<vector<string>> &map_content, vector<character> &living,
         string raw;
         cout << "input a direction (two integer split by space). \n";
         cout << " example: input '1 1' to indecate the direction towards 45 degrees to the upper right. \n";
-        char x, y;
+        char x[50], y[50];
         cin >> x >> y;
-        while (!isdigit(x) || !isdigit(y) || (x == 0 && y == 0)) {
+        while (((atoi(x) == 0 && x != "0" ) || (atoi(y) == 0 && y != "0" ))&& (x == "0" && y == "0")) {
             cout << "please input a valid value!" << endl;
             cin >> x >> y;
         }
-        direction.x = x;
-        direction.y = y;
+        direction.x = atoi(x);
+        direction.y = atoi(y);
         cin >> raw;
         bool available = true;
         char a[100000];
@@ -657,13 +657,13 @@ void TuskenRaider_1(vector<vector<string>> &map_content, vector<character> &livi
             }
         }
         cout << endl << "enter your choice: ";
-        char choice;
+        char choice[50];
         cin >> choice;
-        while (!isdigit(choice) || (isdigit(choice) && (choice <= 0 || choice >= living.size())) || !living[atoi(&choice)].life || living[atoi(&choice)].get_role() == "JangoFett") {
+        while (!strlen(choice) == 1 || !isdigit(choice[0]) || (isdigit(choice[0]) && (choice[0] <= '0' || choice[0] >= '0'+living.size())) || !living[atoi(choice)].life || living[atoi(choice)].get_role() == "JangoFett") {
             cout << endl << "please enter a valid choice!";
             cin >> choice;
         }
-        int index = atoi(&choice);
+        int index = atoi(choice);
         int miss = rand() % 2;
         if (miss) {
             cout << "Oops! you missed! \n";
@@ -713,15 +713,15 @@ void DarthMaul_1(vector<vector<string>> &map_content, vector<character> &living,
         if (cmd == 'y') {
             cout << "input a direction (two integer split by space). \n";
             cout << " example: input '1 -1' to indecate the direction towards 45 degrees to the lower right. \n";
-            char x, y;
-            cin >> x, y;
-            while (!isdigit(x) || !isdigit(y) || (x == 0 && y == 0)) {
+            char x[50], y[50];
+            cin >> x >> y;
+            while (((atoi(x) == 0 && x != "0" ) || (atoi(y) == 0 && y != "0" ))&& (x == "0" && y == "0")) {
                 cout << "please input a valid value!" << endl;
-                cin >> x, y;
+                cin >> x >> y;
             }
             Point direction;
-            direction.x = round((5 / (pow(x, 2) + pow(y, 2))) * x);
-            direction.y = round((5 / (pow(x, 2) + pow(y, 2))) * y);
+            direction.x = round((5 / (pow(atoi(x), 2) + pow(atoi(y), 2))) * atoi(x));
+            direction.y = round((5 / (pow(atoi(x), 2) + pow(atoi(y), 2))) * atoi(y));
             int current_x = living[index].get_coordinates().x + direction.x;
             int current_y = living[index].get_coordinates().y + direction.y;
             if (current_x <= 0 || current_x > 40 || current_y <= 0 || current_y >= 20) {
