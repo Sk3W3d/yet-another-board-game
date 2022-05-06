@@ -279,7 +279,7 @@ int main(){
                             if (counter1++ >= 2){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
-                                LukeSkywalker_1(players, map.get_map_content(), intercept);                            
+                                LukeSkywalker_1(players, map.map_content, intercept);                            
                             }
                         } else {
                             cout << "You aborted using skill. Please re-enter command. \n";
@@ -293,7 +293,7 @@ int main(){
                             if (counter1++ >= 2){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
-                                HanSolo_1(players, map.get_map_content(), intercept);
+                                HanSolo_1(players, map.map_content, intercept);
                             }
                         } else if (skill == "2")
                         {
@@ -314,14 +314,14 @@ int main(){
                             if (counter1++ >= 1){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
-                                ObiwanKenobi_1(players, map.get_map_content(), intercept);
+                                ObiwanKenobi_1(players, map.map_content, intercept);
                             }
                         } else if (skill == "2")
                         {
                             if (counter2++ >= 1){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
-                                ObiwanKenobi_2(map.get_map_content(), players, 30);
+                                ObiwanKenobi_2(map.map_content, players, 30);
                             }
                         } else {
                             cout << "You aborted using skill. Please re-enter command. \n";
@@ -335,14 +335,14 @@ int main(){
                             if (counter1++ >= 1){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
-                                R2D2_1(map.get_map_content(), players);
+                                R2D2_1(map.map_content, players);
                             }
                         } else if (skill == "2")
                         {
                             if (counter2++ >= 1){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
-                                R2D2_2(map.get_map_content(), players);
+                                R2D2_2(map.map_content, players);
                             }
                         } else {
                             cout << "You aborted using skill. Please re-enter command. \n";
@@ -356,14 +356,14 @@ int main(){
                             if (counter1++ >= 1){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
-                                Chewbacca_1(map.get_map_content(), players, intercept);
+                                Chewbacca_1(map.map_content, players, intercept);
                             }
                         } else if (skill == "2")
                         {
                             if (counter2++ >= 1){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
-                                Chewbacca_2(map.get_map_content(), players, intercept);
+                                Chewbacca_2(map.map_content, players, intercept);
                             }
                         } else {
                             cout << "You aborted using skill. Please re-enter command. \n";
@@ -377,14 +377,14 @@ int main(){
                             if (counter1++ >= 2){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
-                                DarthVader_1(map.get_map_content(), players, intercept);
+                                DarthVader_1(map.map_content, players, intercept);
                             }
                         } else if (skill == "2")
                         {
                             if (counter2++ >= 1){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
-                                DarthVader_2(map.get_map_content(), players, intercept);
+                                DarthVader_2(map.map_content, players, intercept);
                             }
                         } else {
                             cout << "You aborted using skill. Please re-enter command. \n";
@@ -398,7 +398,7 @@ int main(){
                             if (counter1++ >= 1){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
-                                JangoFett_1(map.get_map_content(), players, intercept);
+                                JangoFett_1(map.map_content, players, intercept);
                             }
                         } else {
                             cout << "You aborted using skill. Please re-enter command. \n";
@@ -412,7 +412,7 @@ int main(){
                             if (counter1++ >= 3){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
-                                TuskenRaider_1(map.get_map_content(), players);
+                                TuskenRaider_1(map.map_content, players);
                             }
                         } else if (skill == "2")
                         {
@@ -433,7 +433,7 @@ int main(){
                             if (counter1++ >= 1){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
-                                DarthMaul_1(map.get_map_content(), players, intercept);
+                                DarthMaul_1(map.map_content, players, intercept);
                             }
                         } else {
                             cout << "You aborted using skill. Please re-enter command. \n";
@@ -444,10 +444,10 @@ int main(){
                         string skill;
                         cin >> skill;
                         if (skill == "1"){
-                            DarthSidious_1(map.get_map_content(), players, poles);
+                            DarthSidious_1(map.map_content, players, poles);
                         } else if (skill == "2")
                         {
-                            DarthSidious_2(poles, map.get_map_content(), players, which);
+                            DarthSidious_2(poles, map.map_content, players, which);
                         } else {
                             cout << "You aborted using skill. Please re-enter command. \n";
                         }

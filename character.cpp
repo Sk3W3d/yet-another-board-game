@@ -454,7 +454,7 @@ void ObiwanKenobi_2(vector<vector<string>> &map_content, vector<character> &livi
             }
         }
         if (distance == 1000) {
-            cout << " there is no buff in the map! \n";
+            cout << " there is no health buff in the map! \n";
         }
         else {
             int i = 20 - location.y;

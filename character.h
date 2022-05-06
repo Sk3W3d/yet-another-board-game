@@ -100,24 +100,25 @@ bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Po
 bool penetrate_sd(character controller, Point start, Point direction, int distance, vector<vector<string>> map_content, Point& intercept);
 
 // role skills (include attack)
-void LukeSkywalker_1(vector<character> living, vector<vector<string>> map_content, Point &intercept);
-void HanSolo_1(vector<character>living, vector<vector<string>> map_content, Point &intercept);
-void HanSolo_2(vector<character> living);
-void ObiwanKenobi_1(vector<character> living, vector<vector<string>> map_content, Point &intercept);
-void ObiwanKenobi_2(vector<vector<string>> map_content, vector<character> living, int poe_consumption);
-void R2D2_1(vector<vector<string>> map_content, vector<character> living );
-void R2D2_2(vector<vector<string>> map_content, vector<character> living);
-void Chewbacca_1(vector<vector<string>> map_content, vector<character> living, Point &intercept);
-void Chewbacca_2(vector<vector<string>> map_content, vector<character> living, Point &intercept);
-void DarthVader_1(vector<vector<string>> map_content, vector<character> living, Point &intercept);
-void DarthVader_2(vector<vector<string>> map_content, vector<character> living, Point &intercept);
-void JangoFett_1(vector<vector<string>> map_content, vector<character> living, Point &intercept);
-void TuskenRaider_1(vector<vector<string>> map_content, vector<character> living);
-void TuskenRaider_2(vector<character> living);
-void DarthMaul_1(vector<vector<string>> map_content, vector<character> living, Point &intercept);
+void aoe(character attacker, vector<character> &living, int poe_comsume, vector<vector<string>> &map_content, Point &intercept);
+void LukeSkywalker_1(vector<character> &living, vector<vector<string>> &map_content, Point &intercept);
+void HanSolo_1(vector<character> &living, vector<vector<string>> &map_content, Point &intercept);
+void HanSolo_2(vector<character> &living);
+void ObiwanKenobi_1(vector<character> &living, vector<vector<string>> &map_content, Point &intercept);
+void ObiwanKenobi_2(vector<vector<string>> &map_content, vector<character> &living, int poe_consumption);
+void R2D2_1(vector<vector<string>> &map_content, vector<character> &living );
+void R2D2_2(vector<vector<string>> &map_content, vector<character> &living);
+void Chewbacca_1(vector<vector<string>> &map_content, vector<character> &living, Point &intercept);
+void Chewbacca_2(vector<vector<string>> &map_content, vector<character> &living, Point &intercept);
+void DarthVader_1(vector<vector<string>> &map_content, vector<character> &living, Point &intercept);
+void DarthVader_2(vector<vector<string>> &map_content, vector<character> &living, Point &intercept);
+void JangoFett_1(vector<vector<string>> &map_content, vector<character> &living, Point &intercept);
+void TuskenRaider_1(vector<vector<string>> &map_content, vector<character> &living);
+void TuskenRaider_2(vector<character> &living);
+void DarthMaul_1(vector<vector<string>> &map_content, vector<character> &living, Point &intercept);
 bool reach(Point p1, Point p2);
-void DarthSidious_1(vector<vector<string>> map_content, vector<character> living, Point poles[]);
-void DarthSidious_2(Point poles[], vector<vector<string>> map_content, vector<character> living, int &which);
+void DarthSidious_1(vector<vector<string>> &map_content, vector<character> &living, Point poles[]);
+void DarthSidious_2(Point poles[], vector<vector<string>> &map_content, vector<character> &living, int &which);
 
 
 #endif
