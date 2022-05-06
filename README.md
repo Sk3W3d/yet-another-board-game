@@ -145,7 +145,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Mass: 1.1
     HP: 480
     Ability 1 (attack): dark force
-        POE consumption: 25
+        POE consumption: 16
         Overheat: 2
         Push all enemies within distance of 4 away from Vader by distance of 5. Deals 30 damage.
         If these enemies hit walls during forced moving, they are dealt additional 120 damage.	
