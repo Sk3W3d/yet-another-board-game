@@ -35,7 +35,7 @@ public:
     
     void update_hp(int hp_change) { 
         if (shield_buff) {
-            std::cout << "The damage is absorbed by shield buff. \n";
+            std::cout << "This damage is absorbed by the shield buff of " << role << ": ";
             shield_buff = 0;
         }
         else if (role == "TuskenRaider" && hp_change < 0) {
