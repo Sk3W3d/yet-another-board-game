@@ -321,7 +321,7 @@ int main(){
                             if (counter2++ >= 1){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
-                                ObiwanKenobi_2(map.map_content, players, 30);
+                                ObiwanKenobi_2(map.map_content, players, 20);
                             }
                         } else {
                             cout << "You aborted using skill. Please re-enter command. \n";
@@ -460,7 +460,7 @@ int main(){
                     players[i].display_status();
                 } else if (cmd_input == "map")
                 {
-                    map.output_map();
+                    // map.output_map();
                     refresh_map_display(map, players);
                 } else if (cmd_input == "save")
                 {

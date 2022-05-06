@@ -441,7 +441,7 @@ void ObiwanKenobi_1(vector<character> &living, vector<vector<string>> &map_conte
 }
 
 void ObiwanKenobi_2(vector<vector<string>> &map_content, vector<character> &living, int poe_consumption) {
-    Point location = { 0, 0 };
+    Point location = { 0, 0 }, minimum;
     if (living[search("Obi-wanKenobi", living)].get_poe() >= poe_consumption) {
         int distance = 1000;
         for (int i = 0; i < 19; i++) {
@@ -449,7 +449,10 @@ void ObiwanKenobi_2(vector<vector<string>> &map_content, vector<character> &livi
                 if (map_content[i][j] == "\u002B ") {
                     location.x = j + 1;
                     location.y = 20 - i;
-                    distance = min(double(distance), distance_pp(location, living[search("Obi-wanKennobi", living)].get_coordinates()));
+                    if (distance > distance_pp(location, living[search("Obi-wanKennobi", living)].get_coordinates())){
+                        minimum.x = location.x; minimum.y = location.y;
+                        distance = distance_pp(location, living[search("Obi-wanKennobi", living)].get_coordinates());                    
+                    }
                 }
             }
         }
@@ -457,11 +460,11 @@ void ObiwanKenobi_2(vector<vector<string>> &map_content, vector<character> &livi
             cout << " there is no health buff in the map! \n";
         }
         else {
-            int i = 20 - location.y;
-            int j = location.x - 1;
+            int i = 20 - minimum.y;
+            int j = minimum.x - 1;
             map_content[i][j] = "";
             living[search("Obi-wanKenobi", living)].set_health_buff(1);
-            living[search("Obi-wanKenobi", living)].consume_poe(10);
+            living[search("Obi-wanKenobi", living)].consume_poe(20);
             cout << "buff get. Now your POE is " << living[search("Obi-wanKenobi", living)].get_poe();
         }
     }
