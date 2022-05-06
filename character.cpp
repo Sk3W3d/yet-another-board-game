@@ -84,7 +84,7 @@ character::character(std::string role){
         penetrate = true;
         control = false;
         inward = false;
-        control_distance = 0;
+        control_distance = 5;
     } else if (role == "DarthVader")
     {
         hp = 480;
@@ -140,7 +140,7 @@ character::character(std::string role){
 int character::poe_gen(){
     srand(time(0));
     int roll = rand()%10 + 1;
-    std::cout << "You rolled " << roll << "! \n";
+    std::cout << "You rolled POE of " << roll << "! \n";
     poe = std::min(max_poe, poe+roll);
     std::cout << "You now have POE of " << poe << ". \n";
 }
@@ -266,17 +266,34 @@ bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Po
 
 bool penetrate_sd(character controller, Point start, Point direction, int distance, vector<vector<string>> map_content, Point& intercept) {
     //sd: given start Point, distance and direction
-    //note: only controlling skills call this function
-    int dx = round((distance / distance_pp(direction, start)) * (direction.x - start.x));
-    int dy = round((distance / distance_pp(direction, start)) * (direction.y - start.y));
-    Point end;
-    end.x = (start.x + dx <= 40 && start.x + dx >= 0) ? start.x + dx : (start.x + dx > 40 ? 40 : 0);
-    end.y = (start.y + dy <= 20 && start.x + dx >= 0) ? start.x + dx : (start.x + dx > 20 ? 20 : 0);
-    if ((end.x - controller.get_coordinates().x) * (start.x - controller.get_coordinates().x) < 0) {
-        end.x = controller.get_coordinates().x + (start.x == controller.get_coordinates().x ? 0 : abs(start.x - controller.get_coordinates().x) / (start.x - controller.get_coordinates().x));
-        end.y = controller.get_coordinates().y + (start.y == controller.get_coordinates().y ? 0 : abs(start.y - controller.get_coordinates().y) / (start.y - controller.get_coordinates().y));
+    //parameter "controller": only for making sure that the 'controllee' is not gonna exceed the controller's position when pulled.
+    //note: only controlling skills and JangoFett's 1st ability call this function
+    if (start.x == controller.get_coordinates().x && start.y == controller.get_coordinates().y){
+        intercept = start;
+        return true;
     }
-    return penetrate_se(start, end, map_content, intercept);
+        Point fake = {start.x + direction.x, start.y + direction.y};
+
+        int dx = round((distance/distance_pp(fake, start)) * direction.x);
+        int dy = round((distance/distance_pp(fake, start)) * direction.y);
+
+        //cout << "dx dy start.x start.y ==== " << dx << "  " << dy << "  " << start.x << "  " << start.y << "  " << endl;
+
+        Point end;
+        end.x = (start.x + dx <= 40 && start.x + dx >= 0) ? start.x + dx : (start.x + dx > 40 ? 40 : 0);
+        end.y = (start.y + dy <= 20 && start.y + dy >= 0) ? start.y + dy : (start.y + dy > 20 ? 20 : 0);
+
+        //cout << "end in penetrate_sd:  " << end.x << "  " << end.y << endl;
+
+        if (((end.x - controller.get_coordinates().x) * (start.x - controller.get_coordinates().x) < 0) && (end.x != controller.get_coordinates().x || end.y != controller.get_coordinates().y)) {
+        //    cout << "if statement in penetrate_sd is true" << endl;
+            end.x = controller.get_coordinates().x;
+            end.y = controller.get_coordinates().y;
+        }
+        else if (end.x == controller.get_coordinates().x && end.y == controller.get_coordinates().y){
+            end = controller.get_coordinates();
+        }
+        return penetrate_se(start, end, map_content, intercept);
 }
 
 int search(string name, vector<character> living) {
@@ -306,7 +323,7 @@ void aoe(character attacker, vector<character> &living, int poe_comsume, vector<
                     cout << living[i].get_role() << " has been moved to (" << living[i].get_coordinates().x << ", " << living[i].get_coordinates().y << ") \n";
                     if (attacker.get_role() == "DarthVader" && stopped) {
                         living[i].update_hp(-120);
-                        cout << living[i].get_role() << " hit wall. additional damage is dealt. his HP is now:" << living[i].get_hp() << endl;
+                        cout << living[i].get_role() << " hit wall. Additional 120 damage is dealt. His HP is now: " << living[i].get_hp() << endl;
                     }
                 }
             }
@@ -343,11 +360,17 @@ void HanSolo_1(vector<character> &living, vector<vector<string>> &map_content, P
     char command;
     cin >> command;
     if (command == 'e') {
+        int count = 0;
         cout << "possible choices: ";
         for (int i = 0; i < living.size(); i++) {
             if ((living[i].get_role() != "HanSolo") && living[i].life) {
                 cout << i << ":" << living[i].get_role() << "    ";
+                count++;
             }
+        }
+        if (count == 0) {
+            cout << "none. Attack aborted. \n";
+            return;
         }
         cout << endl << "enter your choice: ";
         char choice[50];
@@ -396,10 +419,16 @@ void HanSolo_2(vector<character> &living) {
     cin >> command;
     if (command == 'i') {
         cout << "possible choices: ";
+        int count = 0;
         for (int i = 0; i < living.size(); i++) {
             if ((living[i].get_role() != "HanSolo") && living[i].life) {
                 cout << i << ":" << living[i].get_role() << "  ";
+                count++;
             }
+        }
+        if (count == 0) {
+            cout << "none. Interchange aborted.";
+            return;
         }
         cout << endl << "enter your choice: ";
         char choice[50];
@@ -537,25 +566,25 @@ void Chewbacca_2(vector<vector<string>> &map_content, vector<character> &living,
         for (int i = 0; i < living.size(); i++) {
             if (living[i].life && distance_pp(living[search("Chewbacca", living)].get_coordinates(), living[i].get_coordinates()) <= 8 && living[i].get_role() != "Chewbacca") {
                 Point direction = { living[search("Chewbacca", living)].get_coordinates().x - living[i].get_coordinates().x, living[search("Chewbacca", living)].get_coordinates().y - living[i].get_coordinates().y };
-                    penetrate_sd(living[search("Chewbacca", living)], living[search("Chewbacca", living)].get_coordinates(), direction, living[search("Chewbacca", living)].control_distance, map_content, intercept);
+                    penetrate_sd(living[search("Chewbacca", living)], living[i].get_coordinates(), direction, living[search("Chewbacca", living)].control_distance, map_content, intercept);
                     living[i].set_pos(intercept.x, intercept.y);
                     living[i].set_poe(0);
                     cout << living[i].get_role() << " moved to ( " << living[i].get_coordinates().x << ", " << living[i].get_coordinates().y << "), and POE reset. \n";
             }
         }
         living[search("Chewbacca", living)].consume_poe(25);
-            cout << " your current POE (points of energy) is :" << living[search("Chewbacca", living)].get_poe();
+            cout << " your current POE (points of energy) is :" << living[search("Chewbacca", living)].get_poe() << endl;
     }
 }
 
 void DarthVader_1(vector<vector<string>> &map_content, vector<character> &living, Point &intercept) {
-    if (living[search("DarthVader", living)].get_poe() < 25) {
-        cout << "YOUR POE(points of enregy is not enough! " << endl;
+    if (living[search("DarthVader", living)].get_poe() < 16) {
+        cout << "YOUR POE (points of enregy) is not enough! " << endl;
         return;
     }
     else {
-        aoe(living[search("DarthVader", living)], living, 25, map_content, intercept);
-        living[search("DarthVader", living)].consume_poe(25);
+        aoe(living[search("DarthVader", living)], living, 16, map_content, intercept);
+        living[search("DarthVader", living)].consume_poe(16);
         cout << "your current poe: " << living[search("DarthVader", living)].get_poe() << endl;
     }
 }
@@ -567,9 +596,9 @@ void DarthVader_2(vector<vector<string>> &map_content, vector<character> &living
     }
     else {
         for (int i = 0; i < living.size(); i++) {
-            if (living[i].life && distance_pp(living[search("DarthVader", living)].get_coordinates(), living[i].get_coordinates()) <= 10 && living[i].get_role() != "DarthVaader") {
+            if (living[i].life && distance_pp(living[search("DarthVader", living)].get_coordinates(), living[i].get_coordinates()) <= 10 && living[i].get_role() != "DarthVader") {
                 Point direction = { living[search("DarthVader", living)].get_coordinates().x - living[i].get_coordinates().x, living[search("DarthVader", living)].get_coordinates().y - living[i].get_coordinates().y };
-                    penetrate_sd(living[search("DarthVader", living)], living[search("DarthVader", living)].get_coordinates(), direction, living[search("DarthVader", living)].control_distance, map_content, intercept);
+                    penetrate_sd(living[search("DarthVader", living)], living[i].get_coordinates(), direction, 5, map_content, intercept);
                     living[i].set_pos(intercept.x, intercept.y);
                     cout << living[i].get_role() << " moved to ( " << living[i].get_coordinates().x << ", " << living[i].get_coordinates().y << ") \n";
             }
@@ -597,6 +626,7 @@ void JangoFett_1(vector<vector<string>> &map_content, vector<character> &living,
         }
         direction.x = atoi(x);
         direction.y = atoi(y);
+        cout << "Please input the missile flying distance (integer) :";
         cin >> raw;
         bool available = true;
         char a[100000];
@@ -625,7 +655,7 @@ void JangoFett_1(vector<vector<string>> &map_content, vector<character> &living,
         for (int i = 0; i < map_content.size(); i++) {
             for (int j = 0; j < 40; j++) {
                 if (map_content[i][j] == "\u2588\u2588") {
-                    Point wall = { j + 1, 20 - 1 };
+                    Point wall = { j + 1, 20 - i };
                     if (distance_pp(explosion, wall) <= 4) {
                         map_content[i][j] = "";
                         cout << "wall at ( " << wall.x << ", " << wall.y << ") is cleared. \n";
@@ -640,7 +670,7 @@ void JangoFett_1(vector<vector<string>> &map_content, vector<character> &living,
             }
         }
         living[search("JangoFett", living)].consume_poe(13);
-        cout << "your current POE(point sof energy): " << living[search("JangoFett", living)].get_poe();
+        cout << "your current POE(point sof energy): " << living[search("JangoFett", living)].get_poe() << endl;
     }
 }
 

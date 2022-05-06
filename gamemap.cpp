@@ -63,11 +63,16 @@ void gamemap::init_map(){
 
 void gamemap::output_map(){
     for (int i = 0; i < 20; i++){
+        std::cout << std::setw(2) << 20-i;
         for (int j = 0; j < 40; j++){
             std::cout << std::setw(2) << map_content[i][j];
         }
         std::cout << std::endl;
     }
+    for (int j = 0; j < 40; j++){
+            std::cout << std::setw(2) << j;
+        }
+    std::cout << "\n";
 }
 
 void gamemap::element_gen(int round){

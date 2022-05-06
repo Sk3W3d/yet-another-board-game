@@ -129,13 +129,16 @@ int main(){
         cout << endl;
         for (int i = 0; i < player_num; i++){
             if (players[i].get_hp() <= 0) continue;
-            cout << "------------------------------------------------------------------------------------\n";
-            cout << "------------------------------------------------------------------------------------\n";
+            cout << "---------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
+            cout << "---------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
             refresh_map_display(map, players);
-            cout << "Now it's " << players[i].get_role() << "(" << players[i].get_symbol() << ")'s turn. ";
+            cout << "*  *  *  Now it's " << players[i].get_role() << "(" << players[i].get_symbol() << ")'s turn ! ! *  *  *  *  *  \n";
+            cout << "Current position: (" << players[i].get_coordinates().x << ", " << players[i].get_coordinates().y << ") \n";
 
             players[i].beginning_of_turn();
             
+            cout << "Input your next command: (move, skill, map, status, end, save, and exit)\n";
+
             string cmd_input;
             cin >> cmd_input;
 
@@ -149,7 +152,7 @@ int main(){
                 }
                 else if (cmd_input == "move"){
                     // RELATIVE COORDINATES INPUT
-                    cout << "Please input the relative coordinates of the position you want to move to: (2 integers)";
+                    cout << "Please input the RELATIVE coordinates of the position you want to move to (2 integers)(e.g. 0 1 indicates moving upwards by 1): ";
                     int x, y;
                     cin >> x >> y;
                     if ((players[i].get_coordinates().x + x) <= 0 || (players[i].get_coordinates().x + x) > map.get_map_content()[0].size()
@@ -406,6 +409,8 @@ int main(){
                                 cout << "Overheat. Unable to execute the skill. Returned to the main command loop. Please re-enter command. \n";
                             } else {
                                 JangoFett_1(map.map_content, players, intercept);
+                                cout << "\n\n" << "Map overview: \n";
+                                map.output_map();
                             }
                         } else {
                             cout << "You aborted using skill. Please re-enter command. \n";
