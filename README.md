@@ -33,7 +33,7 @@
 |     (Sith) Roles    |     ꄑ        |     U+A111                          |     Darth Vader                           |   |
 |                     |     ꀇ        |     U+A007                          |     Jango Fett                            |   |
 |                     |     ꈳ        |     U+A233                          |     Tusken Raider                         |   |
-|                     |     ꎉ, ◘     |     U+A389     U+25D8               |     Darth Maul     Darth Maul in walls    |   |
+|                     |     ꎉ        |     U+A389                          |     Darth Maul                            |   |
 |                     |     ꐡ        |     U+A421                          |     Darth Sidious                         |   |
 |     others          |     *         |     U+002A                          |     Cursor when showing dot               |   |
 
@@ -200,10 +200,6 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Cannot penetrate walls.
         After attack, acquire a chance to move by a distance not more than 5.
         The moving consumes no POE.
-    Ability 2 (passive): The Phantom Menace
-        When moving, Darth Maul can pass and atop at pixels of walls.
-        However, if he is in wall both at the start and the end of his turn :
-        He receives 30 damage at the end of that (his) turn.
 
 ### Darth Sidious
     Related items: electric pole
