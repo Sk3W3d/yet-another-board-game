@@ -18,6 +18,8 @@ public:
     int poe_gen();
 
     void set_poe(int poe) {this->poe = poe;};
+    
+    void consume_poe(int comsumption) { poe -= comsumption; };
 
     int get_poe() {return poe;};
 
@@ -31,7 +33,24 @@ public:
 
     int get_hp() {return hp;};
     
-    void update_hp(int hp_change) {hp += hp_change;};
+    void update_hp(int hp_change) { 
+        if (shield_buff) {
+            std::cout << "The damage is absorbed by shield buff. \n";
+            shield_buff = 0;
+        }
+        else if (role == "TuskenRaider" && hp_change < 0) {
+            int a = rand() % 4;
+            if (a == 0) {
+                std::cout << "didn't change? Because TuskenRaider dodged this damage. Oops! \n";
+            }
+            else {
+                hp += hp_change;
+            }
+        }
+        else {
+            hp += hp_change;
+        }
+    };
 
     void set_hp(int hp) {this->hp = hp;};
 
@@ -41,9 +60,21 @@ public:
 
     int get_health_buff() {return health_buff;};
 
+    void set_shield_buff(int buff) {shield_buff = buff;};
+
+    int get_shield_buff() { return shield_buff; };
+
     std::string get_symbol() {return symbol;};
 
     double get_mass() {return mass;};
+
+    bool life;
+    int damage;
+    int distance;
+    bool penetrate;
+    bool control;
+    bool inward;
+    int control_distance;
 
 private:
     std::string role;
@@ -53,6 +84,7 @@ private:
     int poe;
     double mass;
     int health_buff;
+    int shield_buff;
     std::string symbol;
 };
 
