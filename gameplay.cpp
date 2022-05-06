@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// refresh map display contents
 void refresh_map_display(gamemap map, vector<character> characters){
     for (int i = 0; i < map.get_map_content().size(); i++){
         for (int j = 0; j < map.get_map_content()[0].size(); j++){
@@ -58,17 +59,21 @@ int main(){
             string role;
             fin >> role;
             character new_character(role);
-            int hp, x, y, poe, health_buff;
+            int hp, x, y, poe, health_buff, shield_buff;
+            fin >> hp >> x >> y >> poe >> health_buff >> shield_buff;
             new_character.set_hp(hp);
             new_character.set_pos(x, y);
             new_character.set_poe(poe);
             new_character.set_health_buff(health_buff);
+            new_character.set_shield_buff(shield_buff);
+            new_character.update_hp(0);
             players.push_back(new_character);
         }
 
         fin.close();
     }
     else{
+        // start a new game
         cout << "Input player number: (no less than 2)";
         cout << "Valid characters include {\"LukeSkywalker\", \"HanSolo\", \"Obi-wanKenobi\", \"R2D2\", \"Chewbacca\", "
             << "\"DarthVader\", \"JangoFett\", \"TuskenRaider\", \"DarthMaul\", \"DarthSidious\"}\n";
@@ -110,7 +115,10 @@ int main(){
             cin >> cmd_input;
             while (cmd_input != "end")
             {
-                if (cmd_input == "move"){
+                if (cmd_input == "help"){
+                    cout << "The main commands include: move, skill, map, status, and save. You may enter these commands and the detailed instruction will be shown. \n";
+                }
+                else if (cmd_input == "move"){
                     // RELATIVE COORDINATES INPUT
                     cout << "Please input the relative coordinates of the position you want to move to: (2 integers)";
                     int x, y;
@@ -226,6 +234,24 @@ int main(){
                     } else if (players[i].get_role() == "R2D2")
                     {
                         /* code */
+                    } else if (players[i].get_role() == "Chewbacca")
+                    {
+
+                    } else if (players[i].get_role() == "DarthVader")
+                    {
+
+                    } else if (players[i].get_role() == "JangoFett")
+                    {
+
+                    } else if (players[i].get_role() == "TuskenRaider")
+                    {
+
+                    } else if (players[i].get_role() == "DarthMaul")
+                    {
+
+                    } else if (players[i].get_role() == "DarthSidious")
+                    {
+
                     }
                     
                     
@@ -239,18 +265,21 @@ int main(){
                     refresh_map_display(map, players);
                 } else if (cmd_input == "save")
                 {
+                    cout << "Where would you like to save the game? Please input the file name. \n";
+                    string file_save;
+                    cin >> file_save;
                     ofstream fout;
-                    fout.open("save.txt");
+                    fout.open(file_save);
                     if ( fout.fail() ) {
-                        cout << "Error in file opening!" << endl;
-                        exit(1);
+                        cout << "Error in file opening! Please re-enter the command. " << endl;
+                        continue;
                     }
                     fout << player_num << " " << round << endl;
 
                     for (int i = 0; i < player_num; i++){
                         fout << players[i].get_role() << " " << players[i].get_hp() << " " << players[i].get_coordinates().x 
                             << " " << players[i].get_coordinates().y << " " << players[i].get_poe() << " " 
-                            << players[i].get_health_buff() << endl;
+                            << players[i].get_health_buff() << " " << players[i].get_shield_buff() << endl;
                     }
 
                     fout.close();

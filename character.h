@@ -50,6 +50,7 @@ public:
         else {
             hp += hp_change;
         }
+        if (hp <= 0) life = false;
     };
 
     void set_hp(int hp) {this->hp = hp;};
@@ -90,11 +91,14 @@ private:
 
 using namespace std;
 
+// distance and penetration game decisions
 double min_distance(double x, double y, vector<vector<string>> map_content);
 double distance_pl(Point x, Point a, Point b);
 double distance_pp(Point x, Point y);
 bool penetrate_se(Point start, Point end, vector<vector<string>> map_content, Point &intercept);
 bool penetrate_sd(character controller, Point start, Point direction, int distance, vector<vector<string>> map_content, Point& intercept);
+
+// role skills (include attack)
 
 
 
