@@ -64,7 +64,7 @@ character::character(std::string role){
         hp = 580;
         max_poe = 60;
         mass = 1.2;
-        symbol = "\uA010";
+        symbol = "\uA269";
         coordinates = {8, 5};
         damage = 120;
         distance = 3; 
@@ -111,7 +111,7 @@ character::character(std::string role){
         max_poe = 30;
         mass = 1.5;
         symbol = "\uA233";
-        coordinates = {12, 8};
+        coordinates = {12, 15};
     } else if (role == "DarthMaul")
     {
         hp = 340;
@@ -350,21 +350,21 @@ void HanSolo_1(vector<character> &living, vector<vector<string>> &map_content, P
             }
         }
         cout << endl << "enter your choice: ";
-        char choice;
+        char choice[50];
         cin >> choice;
-        while (!isdigit(choice) || (isdigit(choice) && (choice <= 0 || choice >= living.size())) || !living[atoi(&choice)].life || living[atoi(&choice)].get_role() == "HanSolo") {
+        while (!strlen(choice)==1 || !isdigit(choice[0]) || (isdigit(choice[0]) && (choice[0] < '0' || choice[0] >= '0'+living.size())) || !living[atoi(choice)].life || living[atoi(choice)].get_role() == "HanSolo") {
             cout << endl << "please enter a valid choice!";
             cin >> choice;
         }
-    LABEL1: if (!penetrate_se(living[search("HanSolo", living)].get_coordinates(), living[choice].get_coordinates(), map_content, intercept)) {
+    LABEL1: if (!penetrate_se(living[search("HanSolo", living)].get_coordinates(), living[atoi(choice)].get_coordinates(), map_content, intercept)) {
         cout << "your attack cannot penetrate walls! \n";
         cout << "please input your choice again or input 'g' to give up attacking :";
         cin >> choice;
-        while (choice != 'g' && (!isdigit(choice) || (isdigit(choice) && (choice <= 0 || choice >= living.size())) || !living[atoi(&choice)].life || living[atoi(&choice)].get_role() == "HanSolo")) {
+        while (!strlen(choice)==1 || choice[0] != 'g' && (!isdigit(choice[0]) || (isdigit(choice[0]) && (choice[0] >= '0'+living.size())) || !living[atoi(choice)].life || living[atoi(choice)].get_role() == "HanSolo")) {
             cout << "please enter a valid command!";
             cin >> choice;
         }
-        if (choice != 'g') {
+        if (choice[0] != 'g') {
             goto LABEL1;
         }
         else {
@@ -377,9 +377,9 @@ void HanSolo_1(vector<character> &living, vector<vector<string>> &map_content, P
             goto LABEL2;
         }
         else {
-            living[choice].update_hp(-living[search("HanSolo", living)].damage);
+            living[atoi(choice)].update_hp(-living[search("HanSolo", living)].damage);
             living[search("HanSolo", living)].consume_poe(12);
-            cout << living[choice].get_role() << " HP-" << living[search("HanSolo", living)].damage << " and is now" << living[choice].get_hp() << endl;
+            cout << living[atoi(choice)].get_role() << " HP-" << living[search("HanSolo", living)].damage << " and is now" << living[atoi(choice)].get_hp() << endl;
             cout << "your POE:" << living[search("HanSolo", living)].get_poe() << endl;
         }
     }

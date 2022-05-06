@@ -171,10 +171,12 @@ int main(){
                         if (map.get_map_content()[20-destination.y][destination.x-1] == "\u002B "){
                             cout << "You got health buff! \n";
                             players[i].set_health_buff(players[i].get_health_buff()+2);
+                            map.update_map(20-destination.y, destination.x-1, "");
                         }
                         if (map.get_map_content()[20-destination.y][destination.x-1] == "\u25BF "){
                             cout << "You got shield buff! \n";
                             players[i].set_shield_buff(1);
+                            map.update_map(20-destination.y, destination.x-1, "");
                         }
                         cout << "Remaining POE: " << players[i].get_poe() << endl;
                     } else {
@@ -184,10 +186,12 @@ int main(){
                         if (map.get_map_content()[20-destination.y][destination.x-1] == "\u002B "){
                             cout << "You got health buff! \n";
                             players[i].set_health_buff(players[i].get_health_buff()+2);
+                            map.update_map(20-destination.y, destination.x-1, "");
                         }
                         if (map.get_map_content()[20-destination.y][destination.x-1] == "\u25BF "){
                             cout << "You got shield buff! \n";
                             players[i].set_shield_buff(1);
+                            map.update_map(20-destination.y, destination.x-1, "");
                         }
                         cout << "Remaining POE: " << players[i].get_poe() << endl;
                     }
