@@ -86,6 +86,8 @@ int main(){
         while (player_num < 2 && player_num > 10)
         {
             cout << "Invalid player number. Please input a number from 2 to 10. \n";
+            cin >> player_num_str;
+            player_num = atoi(player_num_str.c_str());
         }
         
         for (int i = 0; i < player_num; i++){
@@ -149,7 +151,7 @@ int main(){
                         cout << "Movement successful. Current position: " << destination.x << ", " << destination.y << endl;
                         cout << "Remaining POE: " << players[i].get_poe() << endl;
                     } else {
-                        cout << "Movement unsucessful. You hit the wall. Current position: " << intercept.x << ", " << intercept.y << endl;
+                        cout << "Movement unsuccessful. You hit the wall. Current position: " << intercept.x << ", " << intercept.y << endl;
                         players[i].set_poe(players[i].get_poe() - players[i].get_mass() * distance_pp(players[i].get_coordinates(), intercept));
                         players[i].set_pos(intercept.x, intercept.y);
                         cout << "Remaining POE: " << players[i].get_poe() << endl;
