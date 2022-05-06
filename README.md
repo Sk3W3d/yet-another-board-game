@@ -130,11 +130,11 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Ability 1 (attack): fist of fury
         POE consumption: (-8)
         Overheat: 1
-        Deals 125 damage to one enemy within distance of 3.
+        Deals 125 damage to every enemy within distance of 2. Regardless of walls.yi
     Ability 2 (special): roar (available only when HP not less than 180)
-        POE consumption: 40
+        POE consumption: 25
         Overheat: 1
-        Pull all enemies within distance of 8 by distance of 3 (towards Chewbacca)
+        Pull all enemies within distance of 8 by distance of 5 (towards Chewbacca)
         Reset the POE storage of the enemies pulled.
     Ability 3 (passive): savage
         Mass becomes 0.8 when HP less than 180.
@@ -147,8 +147,8 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Ability 1 (attack): dark force
         POE consumption: 25
         Overheat: 2
-        Push all enemies within distance of 4 away from Vader by distance of 8.
-        Deals 120 damage.	
+        Push all enemies within distance of 4 away from Vader by distance of 5. Deals 30 damage.
+        If these enemies hit walls during forced moving, they are dealt additional 120 damage.	
     Ability 2 (special): dark force control
         POE consumption: 10
         Overheat: 1
@@ -176,15 +176,17 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
     Mass: 1.5
     HP: 300
     Ability 1 (attack): snipe
-        POE consumption: 6
+        POE consumption: 5
         Overheat: 3
-        Deals 70 damage to any one enemy existing on the map.
+        Deals 65 damage to any one enemy existing on the map.
         However there is a 50% chance of missing.
     Ability 2 (special): absorb
-        Deals 70 damage to every enemy in distance of 5.
+        POE consumption: 5
+        Overheat: 1
+        Deals 70 damage to every enemy in distance of 4. Regarless of walls.
         Absorb the sum of the deduction of their HP.
     Ability 3 (passive): dodge
-        have 10% chance to recover 50 HP at every end of his trun.
+        Have 25% chance to dodge any damage applied to him.
 
 ### Darth Maul
     Related items: N/A
@@ -206,23 +208,24 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
 ### Darth Sidious
     Related items: electric pole
         Darth Sidious’s lightening can conduct among electric poles.
-        The conduct distance of poles are 5.
+        The conduct distance of poles are 6.
         Through this process, Darth Sidious’ attack can reach very far enemies.
-        At most 5 poles are allowed to exist on the map simultaneously.
-        If excessive poles are placed, random poles will be removed.
+        At most 2 poles are allowed to exist on the map simultaneously.
     Max POE: 75
     Mass: 1.5
     HP: 520
     Ability 1 (attack): dark force lightening
         POE consumption: 15
         Overheat: 2
-        Deals 105 damage to all reachable enemys.
+        range: 6
+        Deals 105 damage to all reachable enemys, either directly or by electric poles.
+        Regardless of walls.
     Ability 2 (special): chancellor power
-        POE consumption: 12
+        POE consumption: 15
         Overheat: +∞
-        Place a electric pole at current pixel and recover HP by 50.
+        Place a electric pole on his upper pixel (if it is empty) and recover HP by 50.
     Ability 3 (passive): come back to life
-        When Darth Sidious is defeated, he has 25% chance to immediately come back to life with 100 HP and previous POE.
+        When Darth Sidious is defeated, he has 25% chance to immediately come back to life with 260 HP and previous POE.
 
 ## 7. Buffs
 Roles can get buffs when they pass or stop at their pixels.
