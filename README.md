@@ -102,7 +102,7 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Obi-wan recovers HP of 40*(n-1), where n is the number of target hit by him.
     Ability 2 (special): force control
         POE consumption: 30
-        Obi-wan directly get the nearest buff existing on the map.
+        Obi-wan directly get the nearest health buff existing on the map.
 
 ### R2D2
     Related items: N/A
