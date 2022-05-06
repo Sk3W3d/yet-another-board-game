@@ -327,9 +327,14 @@ void aoe(character attacker, vector<character> living, int poe_comsume, vector<v
 
 void LukeSkywalker_1(vector<character> living, vector<vector<string>> map_content, Point &intercept) {
     int index = search("LukeSkywalker", living);
-    aoe(living[index], living, 12, map_content, intercept);
-    living[index].consume_poe(12);
-    cout << "your POE (points of energy) now:" << living[index].get_poe() << endl;
+    if (living[index].get_poe() >= 12){
+        aoe(living[index], living, 12, map_content, intercept);
+        living[index].consume_poe(12);
+        cout << "your POE (points of energy) now:" << living[index].get_poe() << endl;
+    }
+    else{
+        cout << "Your POE (points of energy) is not enough!" << endl;
+    }
 }
 
 void HanSolo_1(vector<character>living, vector<vector<string>> map_content, Point &intercept) {
@@ -341,7 +346,7 @@ void HanSolo_1(vector<character>living, vector<vector<string>> map_content, Poin
         cout << "possible choices: ";
         for (int i = 0; i < living.size(); i++) {
             if ((living[i].get_role() != "HanSolo") && living[i].life) {
-                cout << i << ":" << living[i].get_role() << ";  ";
+                cout << i << ":" << living[i].get_role() << "    ";
             }
         }
         cout << endl << "enter your choice: ";
@@ -425,9 +430,14 @@ void HanSolo_2(vector<character> living) {
 }
 
 void ObiwanKenobi_1(vector<character> living, vector<vector<string>> map_content, Point &intercept) {
-    aoe(living[search("Obi-wanKenobi", living)], living, 10, map_content, intercept);
-    living[search("Obi-wanKenobi", living)].consume_poe(10);
-    cout << "your POE (points of energy) now: " << living[search("Obiwan-Kenobi", living)].get_poe();
+    if (living[search("Obi-wanKenobi", living)].get_poe() >= 10){
+        aoe(living[search("Obi-wanKenobi", living)], living, 10, map_content, intercept);
+        living[search("Obi-wanKenobi", living)].consume_poe(10);
+        cout << "your POE (points of energy) now: " << living[search("Obiwan-Kenobi", living)].get_poe() << endl;
+    }
+    else{
+        cout << "your POE (point sof energy) is not enough!" << endl;
+    }
 }
 
 void ObiwanKenobi_2(vector<vector<string>> map_content, vector<character> living, int poe_consumption) {
@@ -436,7 +446,7 @@ void ObiwanKenobi_2(vector<vector<string>> map_content, vector<character> living
         int distance = 1000;
         for (int i = 0; i < 19; i++) {
             for (int j = 0; j < 39; j++) {
-                if (map_content[i][j] == "\u002B") {
+                if (map_content[i][j] == "\u002B ") {
                     location.x = j + 1;
                     location.y = 20 - i;
                     distance = min(double(distance), distance_pp(location, living[search("Obi-wanKennobi", living)].get_coordinates()));
@@ -803,6 +813,7 @@ void DarthSidious_2(Point poles[], vector<vector<string>> map_content, vector<ch
         if (((index == 0 && (!(to_place.x == poles[1].x && to_place.y == poles[1].y) )) || (index == 1 && (!(to_place.x == poles[0].x && to_place.y == poles[0].y) ))) && map_content[20-to_place.y][to_place.x-1] == "") {
             poles[index] = to_place;
             cout << "electric pole placed successfully! \n";
+            which++;
         }
         else {
             cout << "Failed to place the pola, because poles have to be placed at empty cells. However HP += 50 \n";
