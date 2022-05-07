@@ -3,7 +3,14 @@
 #### Jiang Zhejun 3035855868 @Sk3W3d
 #### Fan Zheyu 3035845203 @LordUky
 
-## Features to be implemented: 
+## How to Play the Game? 
+ 1. Clone the repository. 
+ 2. make game
+ 3. ./game
+ 4. You may then choose to start a new game or read a game savefile, choose player number, and which role(s) you want to play as. 
+ The game is command-based. The commands include: move, skill, map, status, end, save, exit. After using one command, the game will hint what parameter(s) you should input for these commands. 
+
+## Features Implemented: 
  1. Choose the number of players and select the character (satisfying code requirement 3: dynamic memmory management. Each player will be created as a new instance of character object, which then satisfies code requirement 2)
  2. Randomly roll the dice to obtain Points of Energy (POE) for futher gameplay (satisfying code requirement 1)
  3. The gamemap and its background methods will be stored in a cpp file. (code requirement 2). There will be random elements generated in the game map. (code requirement 1)
@@ -17,8 +24,7 @@
  3. character.cpp will be developed lastly. This cpp will record all properties and abilities of all characters. 
 
 ## --- The following is the game detail. ---
-#### The game details may change during the development process. 
-## 0. Symbols in the Board Game (not finalized yet, may still change after testing)
+## 0. Symbols in the Board Game
 |                     |     Symbol    |     Unicode                         |     Meaning                               |   |
 |---------------------|---------------|-------------------------------------|-------------------------------------------|---|
 |     walls           |     █         |     U+2588                          |     (single cell of walls)                |   |
