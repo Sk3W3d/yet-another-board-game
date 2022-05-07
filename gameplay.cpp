@@ -73,8 +73,9 @@ int main(){
             string role;
             fin >> role;
             character new_character(role);
-            int hp, x, y, poe, health_buff, shield_buff;
-            fin >> hp >> x >> y >> poe >> health_buff >> shield_buff;
+            int life, hp, x, y, poe, health_buff, shield_buff;
+            fin >> life >> hp >> x >> y >> poe >> health_buff >> shield_buff;
+            new_character.life = life;
             new_character.set_hp(hp);
             new_character.set_pos(x, y);
             new_character.set_poe(poe);
@@ -547,7 +548,7 @@ int main(){
                     fout << player_num << " " << round << endl;
 
                     for (int i = 0; i < player_num; i++){
-                        fout << players[i].get_role() << " " << players[i].get_hp() << " " << players[i].get_coordinates().x 
+                        fout << players[i].get_role() << " " << players[i].life <<" "<< players[i].get_hp() << " " << players[i].get_coordinates().x 
                             << " " << players[i].get_coordinates().y << " " << players[i].get_poe() << " " 
                             << players[i].get_health_buff() << " " << players[i].get_shield_buff() << endl;
                     }
