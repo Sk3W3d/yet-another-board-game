@@ -112,7 +112,7 @@ int main(){
     }
     else{
         // start a new game
-        cout << "Input player number: (no less than 2)";
+        cout << "Input player number: (no less than 2, no more than 10) ";
         
         string player_num_str;
         cin >> player_num_str;
@@ -129,7 +129,7 @@ int main(){
         const string roles[] = {"LukeSkywalker", "HanSolo", "Obi-wanKenobi", "R2D2", "Chewbacca", 
             "DarthVader", "JangoFett", "TuskenRaider", "DarthMaul", "DarthSidious"};
         for (int i = 0; i < player_num; i++){
-            cout << "What role does player no. " << (i+1) << " want to play? (input full name)";
+            cout << "What role does player no. " << (i+1) << " want to play? (input character no. or full name) ";
             string role;
             role_input: cin >> role;
             bool role_exist = false;
@@ -464,7 +464,7 @@ int main(){
                             } else {
                                 JangoFett_1(map.map_content, players, intercept);
                                 cout << "\n\n" << "Map overview: \n";
-                                map.output_map();
+                                refresh_map_display(map, players);
                             }
                         } else {
                             cout << "You aborted using skill. Please re-enter command. \n";
