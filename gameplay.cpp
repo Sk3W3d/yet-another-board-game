@@ -54,9 +54,18 @@ int main(){
         cin >> file;
         ifstream fin;
         fin.open(file);
-        if ( fin.fail() ){
-            cout << "Error in file opening!" << endl;
+        while ( fin.fail() ){
+            cout << "Error in file opening! Please re-enter the filename or enter exit to quit the game. " << endl;
+            fin.close();
+            cin >> file;
+            if (file == "exit"){
+                cout << "Exiting the game. \n";
+                exit(1);
+            }
+            ifstream fin;
+            fin.open(file);
         }
+        
         // gamemap map;
         // map.init_map();
         fin >> player_num >> round;
@@ -75,13 +84,26 @@ int main(){
             players.push_back(new_character);
         }
 
+        fin >> which;
+        fin >> poles[0].x >> poles[0].y;
+        fin >> poles[1].x >> poles[1].y;
+
+        int map_editted;
+        fin >> map_editted;
+        for (int i = 0; i < map_editted; i++){
+            int x, y; string changed_content;
+            fin >> x >> y >> changed_content;
+            map.update_map(x, y, changed_content);
+        }
+
         fin.close();
+        cout << "Read from gamefile was successful. \n";
     }
     else{
         // start a new game
         cout << "Input player number: (no less than 2)";
-        cout << "Valid characters include {\"LukeSkywalker\", \"HanSolo\", \"Obi-wanKenobi\", \"R2D2\", \"Chewbacca\", "
-            << "\"DarthVader\", \"JangoFett\", \"TuskenRaider\", \"DarthMaul\", \"DarthSidious\"}\n";
+        cout << "Valid characters include {0. \"LukeSkywalker\", 1. \"HanSolo\", 2. \"Obi-wanKenobi\", 3. \"R2D2\", 4. \"Chewbacca\", "
+            << "5. \"DarthVader\", 6. \"JangoFett\", 7. \"TuskenRaider\", 8. \"DarthMaul\", 9. \"DarthSidious\"}\n";
         const string roles[] = {"LukeSkywalker", "HanSolo", "Obi-wanKenobi", "R2D2", "Chewbacca", 
             "DarthVader", "JangoFett", "TuskenRaider", "DarthMaul", "DarthSidious"};
         string player_num_str;
@@ -99,11 +121,24 @@ int main(){
             string role;
             role_input: cin >> role;
             bool role_exist = false;
-            for (int j = 0; j < role.size(); j++)
+            if (role == "0"){
+                role = roles[0];
+                role_exist = true;
+            } else if (atoi(role.c_str()) >= 1 && atoi(role.c_str()) < 10)
             {
-                if (role == roles[j]) role_exist = true;
+                role = roles[atoi(role.c_str())];
+                role_exist = true;
+            } else {
+                for (int j = 0; j < role.size(); j++)
+                {
+                    if (role == roles[j]) role_exist = true;
+                }
             }
-            if (!role_exist) goto role_input;
+
+            if (!role_exist){
+                cout << "Role does not exist! Please re-input the role you would like to play: ";
+                goto role_input;
+            }
             character new_character(role);
             players.push_back(new_character);
         }
@@ -481,6 +516,8 @@ int main(){
                     refresh_map_display(map, players);
                 } else if (cmd_input == "save")
                 {
+                    cout << "Please note that when you read the saved game file and resume the game, the game will start from the next turn. \n";
+                    cout << "Character properties as well as buff positions will be saved. \n";
                     cout << "Where would you like to save the game? Please input the file name. \n";
                     string file_save;
                     cin >> file_save;
@@ -497,6 +534,27 @@ int main(){
                         fout << players[i].get_role() << " " << players[i].get_hp() << " " << players[i].get_coordinates().x 
                             << " " << players[i].get_coordinates().y << " " << players[i].get_poe() << " " 
                             << players[i].get_health_buff() << " " << players[i].get_shield_buff() << endl;
+                    }
+
+                    fout << which;
+                    fout << poles[0].x << " " << poles[0].y << endl;
+                    fout << poles[1].x << " " << poles[1].y << endl;
+
+                    int map_editted = 0;
+                    gamemap original;
+                    original.init_map();
+                    vector<string> changed;
+                    for (int i = 0; i < 20; i++){
+                        for (int j = 0; j < 40; j++){
+                            if (map.get_map_content()[i][j] != original.get_map_content()[i][j]){
+                                map_editted++;
+                                changed.push_back(to_string(i) + " " + to_string(j) + " " + map.get_map_content()[i][j]);
+                            }
+                        }
+                    }
+                    fout << map_editted << endl;
+                    for (int i = 0; i < map_editted; i++){
+                        fout << changed[i] << endl;
                     }
 
                     fout.close();

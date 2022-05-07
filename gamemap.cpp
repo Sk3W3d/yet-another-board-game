@@ -69,7 +69,7 @@ void gamemap::output_map(){
         }
         std::cout << std::endl;
     }
-    for (int j = 0; j < 40; j++){
+    for (int j = 0; j <= 40; j++){
             std::cout << std::setw(2) << j;
         }
     std::cout << "\n";
