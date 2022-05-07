@@ -36,7 +36,7 @@ int main(){
     cout << "For detailed game rules, please read https://github.com/Sk3W3d/yet-another-board-game\n";
     cout << "This is a command-based game. You need to type in commands during your turn to play the game\n";
     cout << "Type help to view all commands. (after entering the game)\n";
-    cout << "Start a new game or read a game? (type \"start\" or \"read\"): ";
+    cout << "Start a new game or read a game? (input \"read\" to read from a saved gamefile, any other key to start a new game): ";
     string gamestart;
     cin >> gamestart;
     int player_num, round;
@@ -93,7 +93,17 @@ int main(){
         for (int i = 0; i < map_editted; i++){
             int x, y; string changed_content;
             fin >> x >> y >> changed_content;
-            map.update_map(x, y, changed_content);
+            if (changed_content == "health"){
+                map.update_map(x, y, "\u002B ");
+            } else if (changed_content == "shield")
+            {
+                map.update_map(x, y, "\u25BF ");
+            } else if (changed_content == "blank")
+            {
+                map.update_map(x, y, "");
+            } else {
+                map.update_map(x, y, changed_content);
+            }
         }
 
         fin.close();
@@ -536,7 +546,7 @@ int main(){
                             << players[i].get_health_buff() << " " << players[i].get_shield_buff() << endl;
                     }
 
-                    fout << which;
+                    fout << which << endl;
                     fout << poles[0].x << " " << poles[0].y << endl;
                     fout << poles[1].x << " " << poles[1].y << endl;
 
@@ -548,7 +558,18 @@ int main(){
                         for (int j = 0; j < 40; j++){
                             if (map.get_map_content()[i][j] != original.get_map_content()[i][j]){
                                 map_editted++;
-                                changed.push_back(to_string(i) + " " + to_string(j) + " " + map.get_map_content()[i][j]);
+                                if (map.get_map_content()[i][j] == "\u002B "){
+                                    changed.push_back(to_string(i) + " " + to_string(j) + " " + "health");
+                                } else if (map.get_map_content()[i][j] == "\u25BF ")
+                                {
+                                    changed.push_back(to_string(i) + " " + to_string(j) + " " + "shield");
+                                } else if (map.get_map_content()[i][j] == "  ")
+                                {
+                                    changed.push_back(to_string(i) + " " + to_string(j) + " " + "blank");
+                                } else {
+                                    changed.push_back(to_string(i) + " " + to_string(j) + " " + map.get_map_content()[i][j]);
+                                }
+                                
                             }
                         }
                     }
