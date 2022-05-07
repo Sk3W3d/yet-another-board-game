@@ -1,0 +1,10 @@
+3 14
+LukeSkywalker 1 300 10 13 18 0 0
+HanSolo 1 100 8 12 10 0 0
+DarthSidious 1 530 13 14 12 0 0
+0
+0 0
+0 0
+2
+12 9 health
+13 18 shield
