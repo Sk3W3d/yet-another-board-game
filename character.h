@@ -7,6 +7,8 @@
 #include <ctime>
 #include <random>
 
+using namespace std;
+
 struct Point {int x, y;};
 
 class character {
@@ -126,7 +128,6 @@ private:
     std::string symbol;
 };
 
-using namespace std;
 
 // distance and penetration game decisions
 double min_distance(double x, double y, vector<vector<string>> map_content);
