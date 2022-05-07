@@ -57,6 +57,15 @@ public:
             hp += hp_change;
         }
         if (hp <= 0) life = false;
+        if (role == "Chewbacca"){
+            if (hp-hp_change >= 180 && hp < 180){
+                mass = 0.8;
+                cout << "Chewbacca's skill 3 (passive) triggers. Now Chewbacca has mass of 0.8 instead of 1. \n";
+            } else if (hp-hp_change < 180 && hp >= 180){
+                mass = 1.0;
+                cout << "Chewbacca's skill 3 (passive) no longer triggers. Now Chewbacca has mass of 1. \n";
+            }
+        }
     };
 
     void set_hp(int hp) {this->hp = hp;};
