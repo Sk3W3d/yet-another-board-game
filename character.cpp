@@ -268,7 +268,7 @@ bool penetrate_sd(character controller, Point start, Point direction, int distan
     //sd: given start Point, distance and direction
     //parameter "controller": only for making sure that the 'controllee' is not gonna exceed the controller's position when pulled.
     //note: only controlling skills and JangoFett's 1st ability call this function
-    if (start.x == controller.get_coordinates().x && start.y == controller.get_coordinates().y){
+    if (controller.get_role() != "JangoFett" && start.x == controller.get_coordinates().x && start.y == controller.get_coordinates().y){
         intercept = start;
         return true;
     }
