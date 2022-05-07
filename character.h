@@ -36,7 +36,7 @@ public:
     int get_hp() {return hp;};
     
     void update_hp(int hp_change) { 
-        if (shield_buff) {
+        if (hp_change < 0 && shield_buff) {
             std::cout << "This damage is absorbed by the shield buff of " << role << ": ";
             shield_buff = 0;
         }
@@ -59,6 +59,7 @@ public:
         else {
             hp += hp_change;
         }
+        // DarthSidious passive skill 3
         if (hp <= 0 && life == true && role == "DarthSidious"){
             cout << "DarthSidious' skill 3 (passive) triggered. He has 25 percent chance to immediately come back to life with 260 HP and previous POE.\n";
             srand(time(0));
@@ -72,7 +73,11 @@ public:
                 cout << "(75 percent chance) Unfortunately, you did not come back to life. \n";
             }
         }
+
+        // life judgement
         if (hp <= 0) life = false;
+
+        // Chewbacca passive skill 3
         if (role == "Chewbacca"){
             if (hp-hp_change >= 180 && hp < 180){
                 mass = 0.8;

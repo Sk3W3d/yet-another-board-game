@@ -596,6 +596,31 @@ int main(){
                 cout << "Input your next command: (move, skill, map, status, end, save, and exit)\n";
                 cin >> cmd_input;
             }
+
+            // end of player's turn
+
+            // JangoFett passive 2&3
+            if (players[i].get_role() == "JangoFett" && players[i].get_hp() >= 50 && players[i].get_hp() < 150) {
+                cout << "Jango Fett's ability 2 is triggered!  \n";
+                int damage = 0.5 * players[i].get_hp();
+                for (int j = 0; j < player_num; i++) {
+                    if (distance_pp(players[i].get_coordinates(), players[j].get_coordinates()) <= 10 && j != i) {
+                        players[j].update_hp(-damage);
+                        cout << players[j].get_role() << " is applied damage of " << damage << ", his HP is now: " << players[j].get_hp() << endl;
+                    }
+                }
+            }
+
+            if (players[i].get_role() == "JangoFett" && players[i].get_hp() < 50) {
+                cout << "Jango Fett's ability 3 is triggered!  \n";
+                int damage = 100;
+                for (int j = 0; j < player_num; i++) {
+                    if (distance_pp(players[i].get_coordinates(), players[j].get_coordinates()) <= 10 && j != i) {
+                        players[j].update_hp(-damage);
+                        cout << players[j].get_role() << " is applied damage of " << damage << ", his HP is now: " << players[j].get_hp() << endl;
+                    }
+                }
+            }
             
         }
 
