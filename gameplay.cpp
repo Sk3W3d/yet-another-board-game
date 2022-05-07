@@ -123,7 +123,7 @@ int main(){
             cin >> player_num_str;
             player_num = atoi(player_num_str.c_str());
         }
-        
+
         cout << "Valid characters include {0. \"LukeSkywalker\", 1. \"HanSolo\", 2. \"Obi-wanKenobi\", 3. \"R2D2\", 4. \"Chewbacca\", "
             << "5. \"DarthVader\", 6. \"JangoFett\", 7. \"TuskenRaider\", 8. \"DarthMaul\", 9. \"DarthSidious\"}\n";
         const string roles[] = {"LukeSkywalker", "HanSolo", "Obi-wanKenobi", "R2D2", "Chewbacca", 
@@ -176,11 +176,6 @@ int main(){
         cout << endl;
         for (int i = 0; i < player_num; i++){
             if (players[i].get_hp() <= 0) continue;
-            //passive skill R2D2
-            if (players[i].get_role() == "R2D2"){
-                cout << "Passive skill (3) triggered: automatically recovers 10 HP at the beginning of its every turn.\n";
-                players[i].update_hp(10);
-            }
 
             cout << "---------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
             cout << "---------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
@@ -189,6 +184,12 @@ int main(){
             cout << "Current position: (" << players[i].get_coordinates().x << ", " << players[i].get_coordinates().y << ") \n";
 
             players[i].beginning_of_turn();
+
+            //passive skill R2D2
+            if (players[i].get_role() == "R2D2"){
+                cout << "Passive skill (3) triggered: automatically recovers 10 HP at the beginning of its every turn.\n";
+                players[i].update_hp(10);
+            }
             
             cout << "Input your next command: (move, skill, map, status, end, save, and exit)\n";
 
