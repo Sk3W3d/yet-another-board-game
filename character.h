@@ -46,6 +46,12 @@ public:
             else {
                 hp += hp_change;
             }
+        } else if (role == "R2D2" && hp_change > 0)
+        {
+            if (hp + hp_change > 550){
+                cout << "Your hp has reached the upper limit (550). (skill 3 for R2D2). \n";
+                hp = 550;
+            } else hp += hp_change;
         }
         else {
             hp += hp_change;

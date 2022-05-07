@@ -174,6 +174,12 @@ int main(){
         cout << endl;
         for (int i = 0; i < player_num; i++){
             if (players[i].get_hp() <= 0) continue;
+            //passive skill R2D2
+            if (players[i].get_role() == "R2D2"){
+                cout << "Passive skill (3) triggered: automatically recovers 10 HP at the beginning of its every turn.\n";
+                players[i].update_hp(10);
+            }
+
             cout << "---------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
             cout << "---------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
             refresh_map_display(map, players);
