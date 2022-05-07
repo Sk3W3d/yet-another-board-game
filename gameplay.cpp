@@ -113,10 +113,7 @@ int main(){
     else{
         // start a new game
         cout << "Input player number: (no less than 2)";
-        cout << "Valid characters include {0. \"LukeSkywalker\", 1. \"HanSolo\", 2. \"Obi-wanKenobi\", 3. \"R2D2\", 4. \"Chewbacca\", "
-            << "5. \"DarthVader\", 6. \"JangoFett\", 7. \"TuskenRaider\", 8. \"DarthMaul\", 9. \"DarthSidious\"}\n";
-        const string roles[] = {"LukeSkywalker", "HanSolo", "Obi-wanKenobi", "R2D2", "Chewbacca", 
-            "DarthVader", "JangoFett", "TuskenRaider", "DarthMaul", "DarthSidious"};
+        
         string player_num_str;
         cin >> player_num_str;
         player_num = atoi(player_num_str.c_str());
@@ -127,6 +124,10 @@ int main(){
             player_num = atoi(player_num_str.c_str());
         }
         
+        cout << "Valid characters include {0. \"LukeSkywalker\", 1. \"HanSolo\", 2. \"Obi-wanKenobi\", 3. \"R2D2\", 4. \"Chewbacca\", "
+            << "5. \"DarthVader\", 6. \"JangoFett\", 7. \"TuskenRaider\", 8. \"DarthMaul\", 9. \"DarthSidious\"}\n";
+        const string roles[] = {"LukeSkywalker", "HanSolo", "Obi-wanKenobi", "R2D2", "Chewbacca", 
+            "DarthVader", "JangoFett", "TuskenRaider", "DarthMaul", "DarthSidious"};
         for (int i = 0; i < player_num; i++){
             cout << "What role does player no. " << (i+1) << " want to play? (input full name)";
             string role;
