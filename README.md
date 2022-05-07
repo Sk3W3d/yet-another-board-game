@@ -172,9 +172,9 @@ Roles are chosen by players at the beginning of a game in one-to-one corresponde
         Deals 95 damage to every enemy within range of 4 when missile explodes.
         Destroy all cells of walls within this range. 
     Ability 2 (passive): special arm
-        At the end of his turn, if his hp < 150, apply the damage of 50% of his current hp to all enemies within range of 10, regardless of walls. 
+        At the end of his turn, if 50 <= hp < 150, apply the damage of 50% of his current hp to all enemies within range of 10, regardless of walls. 
     Ability 3 (passive):
-        When Jango dies: his arming explodes and deals 200 damage to every enemy within distance 4, regardless of walls.
+        At the end of his turn, if hp < 50, apply the damage of 100 to all enemies within range of 10, regardless of walls. 
         
 ### Tusken Raider
     Related Items: N/A
