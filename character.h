@@ -4,6 +4,8 @@
 
 #include <string>
 #include <vector>
+#include <ctime>
+#include <random>
 
 struct Point {int x, y;};
 
@@ -39,6 +41,7 @@ public:
             shield_buff = 0;
         }
         else if (role == "TuskenRaider" && hp_change < 0) {
+            srand(time(0));
             int a = rand() % 4;
             if (a == 0) {
                 std::cout << "didn't change? Because TuskenRaider dodged this damage. Oops! \n";
@@ -55,6 +58,19 @@ public:
         }
         else {
             hp += hp_change;
+        }
+        if (hp <= 0 && life == true && role == "DarthSidious"){
+            cout << "DarthSidious' skill 3 (passive) triggered. He has 25 percent chance to immediately come back to life with 260 HP and previous POE.\n";
+            srand(time(0));
+            int a = rand() % 4;
+            if (a == 0){
+                hp = 260;
+                cout << "(25 percent chance) You successfully came back to life! Now you have 260HP and previous POE. \n";
+                return;
+            } else {
+                life = false;
+                cout << "(75 percent chance) Unfortunately, you did not come back to life. \n";
+            }
         }
         if (hp <= 0) life = false;
         if (role == "Chewbacca"){
