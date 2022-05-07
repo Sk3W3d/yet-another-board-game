@@ -165,7 +165,7 @@ int main(){
     while(!endgame){
         round++;
         map.element_gen(round);
-        refresh_map_display(map, players);
+        // refresh_map_display(map, players);
         cout << "Round " << round << endl;
         cout << "Surviving players: \n";
         for (int i = 0; i < player_num; i++){
@@ -605,7 +605,7 @@ int main(){
             if (players[i].get_role() == "JangoFett" && players[i].get_hp() >= 50 && players[i].get_hp() < 150) {
                 cout << "Jango Fett's ability 2 is triggered!  \n";
                 int damage = 0.5 * players[i].get_hp();
-                for (int j = 0; j < player_num; i++) {
+                for (int j = 0; j < player_num; j++) {
                     if (distance_pp(players[i].get_coordinates(), players[j].get_coordinates()) <= 10 && j != i) {
                         players[j].update_hp(-damage);
                         cout << players[j].get_role() << " is applied damage of " << damage << ", his HP is now: " << players[j].get_hp() << endl;
@@ -616,7 +616,7 @@ int main(){
             if (players[i].get_role() == "JangoFett" && players[i].get_hp() < 50) {
                 cout << "Jango Fett's ability 3 is triggered!  \n";
                 int damage = 100;
-                for (int j = 0; j < player_num; i++) {
+                for (int j = 0; j < player_num; j++) {
                     if (distance_pp(players[i].get_coordinates(), players[j].get_coordinates()) <= 10 && j != i) {
                         players[j].update_hp(-damage);
                         cout << players[j].get_role() << " is applied damage of " << damage << ", his HP is now: " << players[j].get_hp() << endl;
