@@ -22,7 +22,7 @@ void refresh_map_display(gamemap map, vector<character> characters){
     }
     
     for (int k = 0; k < characters.size(); k++){
-        if (characters[k].get_hp()){
+        if (characters[k].life){
             map.update_map(20-characters[k].get_coordinates().y, characters[k].get_coordinates().x-1, characters[k].get_symbol());
         }
     }
