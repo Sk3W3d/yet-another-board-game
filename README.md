@@ -9,6 +9,9 @@
  3. ./game
  4. You may then choose to start a new game or read a game savefile, choose player number, and which role(s) you want to play as. 
  The game is command-based. The commands include: move, skill, map, status, end, save, exit. After using one command, the game will hint what parameter(s) you should input for these commands. 
+ 
+## Link to Demo Video: 
+ Link to video: https://connecthkuhk-my.sharepoint.com/:f:/g/personal/jasonj03_connect_hku_hk/EpVy4Oc_NRlCsQ3_N2sCM_UB8bSedej2nBZzie-QKtQFKQ?e=L7sIga
 
 ## Features Implemented: 
  1. Choose the number of players and select the character (satisfying code requirement 3: dynamic memmory management. Each player will be created as a new instance of character object, which then satisfies code requirement 2)
